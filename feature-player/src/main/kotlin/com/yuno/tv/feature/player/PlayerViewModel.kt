@@ -16,20 +16,28 @@ import kotlinx.coroutines.flow.*
 
 data class PlayerUiState(
     val request: PlaybackRequest, val position: Long = 0L, val duration: Long = 0L,
-    val playing: Boolean = false, val buffering: Boolean = true, val error: ErrorCode? = null,
+    val playing: Boolean = false, val buffering: Boolean = true, val tryingBackup: Boolean = false, val error: ErrorCode? = null,
     val countdown: Int? = null, val settings: PlayerSettings = PlayerSettings(), val speed: Float = 1f,
     val aspect: String = "FIT", val tracks: Tracks = Tracks.EMPTY
 )
 @androidx.media3.common.util.UnstableApi
 class PlayerViewModel(
     initial: PlaybackRequest, private val factory: PlayerFactory, private val library: LibraryRepository,
-    private val preferences: SettingsRepository, private val appScope: CoroutineScope, private val logger: AppLogger
+    private val preferences: SettingsRepository, private val appScope: CoroutineScope, private val logger: AppLogger,
+    private val resolvePlayback: suspend (PlaybackRequest) -> ResolvedPlayback = { request -> com.yuno.tv.core.network.PlaybackResolver().resolve(request.episode ?: throw SourceException(ErrorCode.INVALID_URL)) },
+    private val playbackOutcome: suspend (PlaybackRequest, Boolean) -> Unit = { _, _ -> },
+    lineScore: (PlaybackRequest,Int) -> Int = { _,_ -> 0 }
 ) : ViewModel() {
     private val _state = MutableStateFlow(PlayerUiState(initial))
     val state = _state.asStateFlow()
     var player: ExoPlayer? by androidx.compose.runtime.mutableStateOf<ExoPlayer?>(null)
         private set
+    private var resolution: Job? = null
+    private val fallback = com.yuno.tv.core.network.PlaybackFallback(score=lineScore)
+    private var outcomeRecorded = false
     private var countdown: Job? = null
+    private var active = true
+    private var generation = 0
     private var resumeWhenActive = true
     private var initialized = false
     private var softwareFallback = false
@@ -37,6 +45,7 @@ class PlayerViewModel(
         override fun onIsPlayingChanged(isPlaying: Boolean) { _state.update { it.copy(playing = isPlaying) } }
         override fun onPlaybackStateChanged(playbackState: Int) {
             _state.update { it.copy(buffering = playbackState == Player.STATE_BUFFERING || playbackState == Player.STATE_IDLE) }
+            if (playbackState == Player.STATE_READY && !outcomeRecorded) { outcomeRecorded = true; viewModelScope.launch { playbackOutcome(_state.value.request,true) } }
             if (playbackState == Player.STATE_ENDED) { save(); startCountdown() }
         }
         override fun onPlayerError(error: PlaybackException) {
@@ -55,6 +64,8 @@ class PlayerViewModel(
                 }
                 return
             }
+            viewModelScope.launch { playbackOutcome(_state.value.request,false) }
+            if (tryFallback()) return
             _state.update { it.copy(error = if (error.errorCode in 2000..2999) ErrorCode.NETWORK else ErrorCode.PLAYBACK, buffering = false) }
         }
         override fun onTracksChanged(tracks: Tracks) { _state.update { it.copy(tracks = tracks) } }
@@ -76,17 +87,29 @@ class PlayerViewModel(
             }
         }
     }
-    fun prepare(request: PlaybackRequest) {
-        cancelNext()
-        _state.update { it.copy(request = request, error = null, position = request.position, buffering = true) }
-        val episode = request.episode
-        if (episode == null || !episode.url.startsWith("http", ignoreCase = true)) {
-            _state.update { it.copy(error = ErrorCode.INVALID_URL, buffering = false) }; return
+    fun prepare(request: PlaybackRequest, resetFallback: Boolean = true) {
+        resolution?.cancel(); cancelNext(); outcomeRecorded=false
+        val currentGeneration=++generation
+        if(resetFallback)fallback.reset()
+        player?.stop()
+        _state.update { it.copy(request=request,error=null,position=request.position,buffering=true,tryingBackup=!resetFallback) }
+        resolution=viewModelScope.launch {
+            try {
+                val playback=withTimeout(25_000) { resolvePlayback(request) }
+                player?.apply { setMediaSource(factory.mediaSource(playback)); prepare();seekTo(request.position);playWhenReady=active && resumeWhenActive }
+            } catch(error:Exception) {
+                error.rethrowCancellation()
+                if(currentGeneration!=generation)return@launch
+                playbackOutcome(request,false)
+                if(!tryFallback()) _state.update { it.copy(error=error.friendlyCode(),buffering=false) }
+            }
         }
-        try {
-            val playback = com.yuno.tv.core.network.PlaybackResolver().resolve(episode)
-            player?.apply { setMediaSource(factory.mediaSource(playback)); prepare(); seekTo(request.position); playWhenReady = resumeWhenActive }
-        } catch (error: Exception) { error.rethrowCancellation(); _state.update { it.copy(error = error.friendlyCode(), buffering = false) } }
+    }
+    private fun tryFallback():Boolean {
+        val request=_state.value.request.copy(position=player?.currentPosition?.coerceAtLeast(0) ?: _state.value.position)
+        val next=fallback.next(request) ?: return false
+        logger.event(LogCategory.PLAYER,"line_fallback")
+        prepare(next,resetFallback=false);return true
     }
     fun retry() { prepare(_state.value.request.copy(position = player?.currentPosition?.coerceAtLeast(0) ?: 0L)) }
     fun play() { player?.let { if (it.playbackState == Player.STATE_ENDED) it.seekTo(0); it.play() } }
@@ -126,10 +149,11 @@ class PlayerViewModel(
             catch (error: Exception) { error.rethrowCancellation(); logger.event(LogCategory.DATABASE, "history_save_failed", error) } }
     }
     fun background() {
+        active=false
         resumeWhenActive = player?.playWhenReady ?: true
         save(); cancelNext(); player?.pause()
     }
-    fun foreground() { if (initialized && resumeWhenActive) player?.play() }
+    fun foreground() { active=true; if (initialized && resumeWhenActive) player?.play() }
     fun cancelNext() { countdown?.cancel(); countdown = null; _state.update { it.copy(countdown = null) } }
     private fun startCountdown() {
         val current = _state.value
@@ -143,6 +167,6 @@ class PlayerViewModel(
         }
     }
     override fun onCleared() {
-        save(); player?.removeListener(listener); player?.release(); player = null
+        resolution?.cancel(); save(); player?.removeListener(listener); player?.release(); player = null
     }
 }

@@ -58,7 +58,8 @@ class TvBoxConfigParserTest {
         val parsed = TvBoxConfigParser().parse("""{"spider":"../spider.jar","sites":[{"key":"中文","type":3,"api":"./js/drpy.js","ext":"../js/ext.js"}],"lives":[],"parses":[]}""", SourceOrigin("x","X","https://example.test/config/tv.json",100))
         assertEquals("https://example.test/spider.jar", parsed.spider)
         assertEquals("https://example.test/js/ext.js", parsed.sites.single().ext)
-        assertFalse(parsed.sites.single().supported)
+        assertTrue(parsed.sites.single().supported) // Selectable runtime candidate, never executed by parsing.
+        assertEquals(CapabilityStatus.PARTIAL, parsed.sites.single().capability.status)
     }
 }
 class ConfigResolverTest {

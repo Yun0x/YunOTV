@@ -1,0 +1,18 @@
+{
+  "total": 1787,
+  "capabilities": {
+    "DRPY_JS": 174,
+    "TVBOX_TYPE0": 29,
+    "CMS_API": 95,
+    "SPIDER_JAR": 1459,
+    "UNKNOWN": 27,
+    "LIVE_M3U": 1,
+    "TVBOX_TYPE3": 2
+  },
+  "classification": {
+    "PARTIAL": 1634,
+    "UNSUPPORTED": 58,
+    "SUPPORTED": 95
+  },
+  "note": "PARTIAL is a runtime candidate; not proof of working source operations"
+}

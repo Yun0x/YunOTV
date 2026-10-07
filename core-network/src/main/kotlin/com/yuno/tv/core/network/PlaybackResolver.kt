@@ -20,7 +20,7 @@ class PlaybackResolver {
         val headers = (metadata.headers.orEmpty() + episode.headers.orEmpty()).filter { (key,value) ->
             key.matches(Regex("[A-Za-z0-9-]+")) && !value.contains('\n') && !value.contains('\r')
         }
-        val ua = headers.entries.firstOrNull { it.key.equals("User-Agent", true) }?.value ?: "YunoTV/0.2"
+        val ua = headers.entries.firstOrNull { it.key.equals("User-Agent", true) }?.value ?: "YunoTV/0.3"
         val referer = headers.entries.firstOrNull { it.key.equals("Referer", true) }?.value.orEmpty()
         return ResolvedPlayback(url.toString(), headers, ua, referer, when(kind) {
             PlaybackKind.HLS -> "application/x-mpegURL"; PlaybackKind.MP4 -> "video/mp4"; else -> type

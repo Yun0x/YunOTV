@@ -25,17 +25,22 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
 class SettingsViewModel(private val repository: SettingsRepository, private val configs: ConfigRepository,
-    private val library: LibraryRepository, private val logger: AppLogger) : ViewModel() {
+    private val library: LibraryRepository, private val logger: AppLogger, private val runtime: com.yuno.tv.core.runtime.CompatibilityRuntime? = null) : ViewModel() {
     val settings = repository.settings.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), PlayerSettings())
     private val _error = MutableStateFlow<ErrorCode?>(null)
     val error = _error.asStateFlow()
+    private val _pluginStats = MutableStateFlow(Triple(0,0,0L))
+    val pluginStats = _pluginStats.asStateFlow()
+    init { viewModelScope.launch(Dispatchers.IO) { refreshPluginStats() } }
+    private fun refreshPluginStats() { val jars=runtime?.jars?.stats() ?: (0 to 0L);val js=runtime?.scripts?.stats() ?: (0 to 0L);_pluginStats.value=Triple(jars.first,js.first,(jars.second+js.second)/(1024*1024)) }
+    fun clearPlugins() { action { runtime?.clear();refreshPluginStats() } }
     fun missingFilePicker() { _error.value = ErrorCode.FILE_PICKER }
     fun update(transform: (PlayerSettings) -> PlayerSettings) { action { repository.update(transform) } }
     fun clearHistory() { action { library.clearHistory() } }
     @OptIn(coil.annotation.ExperimentalCoilApi::class)
     fun clearCache(context: Context) { action {
         withContext(Dispatchers.IO) { context.imageLoader.memoryCache?.clear(); context.imageLoader.diskCache?.clear(); context.filesDir.resolve("media-cache").listFiles()?.filter { it.isFile }?.forEach { it.delete() } }
-        configs.clearRemoteCache()
+        runtime?.clear();refreshPluginStats();configs.clearRemoteCache()
     } }
     fun export(context: Context, uri: android.net.Uri) { action { withContext(Dispatchers.IO) {
         context.contentResolver.openOutputStream(uri)?.use { it.write(logger.export()) } ?: throw SourceException(ErrorCode.STORAGE)
@@ -49,6 +54,7 @@ class SettingsViewModel(private val repository: SettingsRepository, private val 
 fun SettingsScreen(vm: SettingsViewModel, context: Context, onSources: () -> Unit) {
     val settings by vm.settings.collectAsStateWithLifecycle()
     val error by vm.error.collectAsStateWithLifecycle()
+    val pluginStats by vm.pluginStats.collectAsStateWithLifecycle()
     var clearHistory by remember { mutableStateOf(false) }
     var clearCache by remember { mutableStateOf(false) }
     val exporter = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/plain")) { uri -> if (uri != null) vm.export(context, uri) }
@@ -71,6 +77,7 @@ fun SettingsScreen(vm: SettingsViewModel, context: Context, onSources: () -> Uni
                 }
             }
         }
+        item { TvAction(stringResource(R.string.plugin_cache, pluginStats.first,pluginStats.second,pluginStats.third),onClick=vm::clearPlugins) }
         item { SettingToggle(stringResource(R.string.auto_next), settings.autoNext) { vm.update { it.copy(autoNext = !it.autoNext) } } }
         item { SettingToggle(stringResource(R.string.record_history), settings.historyEnabled) { vm.update { it.copy(historyEnabled = !it.historyEnabled) } } }
         item { SettingToggle(stringResource(R.string.auto_refresh), settings.autoRefresh) { vm.update { it.copy(autoRefresh = !it.autoRefresh) } } }

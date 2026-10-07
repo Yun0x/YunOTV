@@ -70,10 +70,19 @@ fun PlayerScreen(vm: PlayerViewModel, onExit: () -> Unit) {
     LaunchedEffect(controls, activityTick, state.playing, menu) {
         if (controls && state.playing && menu == null) { delay(8_000); controls = false; root.requestFocus() }
     }
-    BackHandler { when { menu != null -> menu = null; controls -> { controls = false; root.requestFocus() }; else -> { vm.save(); onExit() } } }
+    val handleBack: () -> Unit = {
+        when { menu != null -> menu = null; controls -> { controls = false; root.requestFocus() }; else -> { vm.save(); onExit() } }
+    }
+    BackHandler(onBack = handleBack)
     Box(Modifier.fillMaxSize().background(Color.Black).focusRequester(root).pointerInput(state.error, state.countdown) {
         detectTapGestures { if (state.error == null && state.countdown == null && menu == null) controls = !controls }
     }.onPreviewKeyEvent { event ->
+        // Consume both halves of the remote Back event. API 26's legacy Activity
+        // dispatch can otherwise receive KeyUp after a focused control handles KeyDown.
+        if (event.nativeKeyEvent.keyCode == KeyEvent.KEYCODE_BACK) {
+            if (event.type == KeyEventType.KeyDown) handleBack()
+            return@onPreviewKeyEvent true
+        }
         if (event.type != KeyEventType.KeyDown) return@onPreviewKeyEvent false
         activityTick++
         if (state.error != null && event.nativeKeyEvent.keyCode in listOf(KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_DPAD_RIGHT,
@@ -103,7 +112,7 @@ fun PlayerScreen(vm: PlayerViewModel, onExit: () -> Unit) {
                 view.player = player
                 view.resizeMode = when (state.aspect) { "FILL" -> AspectRatioFrameLayout.RESIZE_MODE_FILL; "CROP" -> AspectRatioFrameLayout.RESIZE_MODE_ZOOM; "16:9" -> AspectRatioFrameLayout.RESIZE_MODE_FILL; "ORIGINAL" -> AspectRatioFrameLayout.RESIZE_MODE_FIT; else -> AspectRatioFrameLayout.RESIZE_MODE_FIT }
             }, modifier = if (state.aspect == "16:9") Modifier.align(Alignment.Center).fillMaxWidth().aspectRatio(16f / 9f) else Modifier.fillMaxSize())
-        if (state.buffering && state.error == null) Text(stringResource(R.string.buffering), modifier = Modifier.align(Alignment.Center))
+        if (state.buffering && state.error == null) Text(stringResource(if(state.tryingBackup)R.string.trying_backup else R.string.buffering), modifier = Modifier.align(Alignment.Center))
         if (state.error != null) Column(Modifier.align(Alignment.Center).background(CinemaColors.panel).padding(28.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)) {
             Text(errorText(state.error!!)); Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {

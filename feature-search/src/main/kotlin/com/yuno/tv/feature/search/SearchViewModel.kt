@@ -28,7 +28,7 @@ class SearchViewModel(private val config: ConfigRepository, private val library:
         if (value.isBlank()) { _state.update { it.copy(results = emptyList(), searched = false) }; return }
         debounce = viewModelScope.launch { delay(400); search(value, saveHistory = false) }
     }
-    fun search(value: String = _state.value.keyword, saveHistory: Boolean = true) {
+    fun search(value: String = _state.value.keyword, saveHistory: Boolean = true, more: Boolean = false) {
         val keyword = value.trim(); if (keyword.isBlank()) return
         if (saveHistory) debounce?.cancel()
         job?.cancel()
@@ -36,12 +36,13 @@ class SearchViewModel(private val config: ConfigRepository, private val library:
             _state.update { it.copy(keyword = keyword, loading = true, searched = true) }
             try {
                 if (saveHistory) library.saveSearch(keyword)
-                useCase(keyword, config.config.value.sites).collect { result ->
+                aggregator.stream(keyword, config.config.value.sites, more).collect { result ->
                     _state.update { it.copy(loading = !result.finished, results = result.results, variants = result.variants,
                         failedSources = result.errors.size, completed = result.completed, total = result.total) }
                 }
             } catch (error: Exception) { error.rethrowCancellation(); _state.update { it.copy(loading = false, failedSources = 1) } }
         }
     }
+    fun searchMore() { search(saveHistory = false, more = true) }
     fun clearHistory() { viewModelScope.launch { library.clearSearches() } }
 }

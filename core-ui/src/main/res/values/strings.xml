@@ -14,7 +14,7 @@
 
 <string name="buffering">正在缓冲…</string><string name="switch_line">切换线路</string><string name="pause">暂停</string><string name="seek_back">快退 %1$d 秒</string><string name="seek_forward">快进 %1$d 秒</string><string name="previous_episode">上一集</string><string name="next_episode">下一集</string><string name="episodes">剧集</string><string name="speed">倍速</string><string name="speed_value">倍速 %1$.2f×</string><string name="aspect">画面比例</string><string name="subtitles">字幕</string><string name="audio_tracks">音轨</string><string name="hide_controls">隐藏控制栏</string><string name="next_countdown">%1$d 秒后自动播放下一集</string><string name="play_now">立即播放</string><string name="aspect_original">原始</string><string name="aspect_16_9">16:9</string><string name="aspect_fill">填充</string><string name="aspect_fit">适应</string><string name="aspect_crop">裁剪</string><string name="subtitles_off">关闭字幕</string><string name="no_tracks">此媒体没有可切换的音轨或字幕。</string>
 
-<string name="clear_history">清空播放历史</string><string name="no_history">暂无播放历史</string><string name="history_hint">播放后会自动保存剧集和观看进度。</string><string name="completed_percent">已看完 %1$d%%</string><string name="clear_history_confirm">清空所有播放历史？</string><string name="no_favorites">暂无收藏</string><string name="favorite_hint">在影片详情中收藏喜欢的内容。</string><string name="player_settings">播放器设置</string><string name="seek_seconds">快进/快退 %1$d 秒</string><string name="default_aspect">默认画面 %1$s</string><string name="auto_next">自动下一集</string><string name="record_history">记录观看历史</string><string name="auto_refresh">自动刷新配置（启动及每 6 小时）</string><string name="clear_cache">清理配置、目录与图片缓存</string><string name="export_logs">导出诊断日志</string><string name="interface_settings">界面设置</string><string name="theme_dark">主题 · 深色影院</string><string name="theme_oled">主题 · 纯黑</string><string name="home_recent">首页默认 · 最近更新</string><string name="home_continue">首页默认 · 继续观看</string><string name="about_text">Yuno TV 0.2.0
+<string name="clear_history">清空播放历史</string><string name="no_history">暂无播放历史</string><string name="history_hint">播放后会自动保存剧集和观看进度。</string><string name="completed_percent">已看完 %1$d%%</string><string name="clear_history_confirm">清空所有播放历史？</string><string name="no_favorites">暂无收藏</string><string name="favorite_hint">在影片详情中收藏喜欢的内容。</string><string name="player_settings">播放器设置</string><string name="seek_seconds">快进/快退 %1$d 秒</string><string name="default_aspect">默认画面 %1$s</string><string name="auto_next">自动下一集</string><string name="record_history">记录观看历史</string><string name="auto_refresh">自动刷新配置（启动及每 6 小时）</string><string name="clear_cache">清理配置、目录与图片缓存</string><string name="export_logs">导出诊断日志</string><string name="interface_settings">界面设置</string><string name="theme_dark">主题 · 深色影院</string><string name="theme_oled">主题 · 纯黑</string><string name="home_recent">首页默认 · 最近更新</string><string name="home_continue">首页默认 · 继续观看</string><string name="about_text">Yuno TV 0.3.0
 支持 Android 8.0 及以上。仅播放你有权访问的媒体。
 第一版支持 JSON CMS、HTTP(S) 直链、TXT/M3U IPTV。
 不执行 Spider/JAR/JS 或解析器，不绕过 DRM 和访问控制。
@@ -39,4 +39,8 @@
     <string name="settings_storage">记录与缓存</string>
     <string name="settings_about">关于 Yuno TV</string>
     <string name="search_progress">已完成 %1$d / %2$d 个来源</string>
+<string name="search_more">搜索更多来源</string>
+<string name="plugin_cache">插件缓存 · JAR %1$d · JS %2$d · %3$d MiB</string>
+<string name="plugin_pending">插件兼容性尚未验证</string>
+<string name="trying_backup">线路播放失败，正在尝试备用线路</string>
 </resources>

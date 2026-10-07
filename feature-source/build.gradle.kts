@@ -11,5 +11,6 @@ kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarg
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-config"))
+    implementation(project(":core-runtime"))
     implementation("androidx.activity:activity-compose:1.10.1")
 }

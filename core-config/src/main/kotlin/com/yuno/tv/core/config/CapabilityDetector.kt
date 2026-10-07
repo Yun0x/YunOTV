@@ -20,7 +20,8 @@ class CapabilityDetector {
         }
         val status = when {
             kind == CapabilityKind.CMS_API || kind == CapabilityKind.DIRECT_MEDIA -> CapabilityStatus.SUPPORTED
-            kind == CapabilityKind.LIVE_M3U -> CapabilityStatus.PARTIAL
+            kind == CapabilityKind.SPIDER_JAR && site.metadata.spider.isBlank() && !api.contains(".jar") -> CapabilityStatus.UNSUPPORTED
+            kind == CapabilityKind.LIVE_M3U || kind == CapabilityKind.DRPY_JS || kind == CapabilityKind.SPIDER_JAR -> CapabilityStatus.PARTIAL
             site.api.isBlank() -> CapabilityStatus.BROKEN
             else -> CapabilityStatus.UNSUPPORTED
         }
@@ -28,7 +29,7 @@ class CapabilityDetector {
     }
     fun apply(config: UnifiedConfig): UnifiedConfig = config.copy(sites = config.sites.map { site ->
         val capability = detect(site)
-        site.copy(capability = capability, supported = capability.status == CapabilityStatus.SUPPORTED)
+        site.copy(capability = capability, supported = capability.status == CapabilityStatus.SUPPORTED || (capability.status == CapabilityStatus.PARTIAL && capability.kind in setOf(CapabilityKind.DRPY_JS, CapabilityKind.SPIDER_JAR)))
     })
 }
 class GenericJsonParser {

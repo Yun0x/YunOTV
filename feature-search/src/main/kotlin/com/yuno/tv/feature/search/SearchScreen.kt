@@ -6,6 +6,8 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.input.key.*
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -17,16 +19,26 @@ import com.yuno.tv.core.ui.R
 @Composable
 fun SearchScreen(vm: SearchViewModel, onDetail: (UnifiedVod) -> Unit) {
     val resultScroll = rememberLazyListState()
+    var editing by remember { mutableStateOf(false) }
+    val keyboard = androidx.compose.ui.platform.LocalSoftwareKeyboardController.current
+    val firstKey = remember { androidx.compose.ui.focus.FocusRequester() }
     var choices by remember { mutableStateOf<List<UnifiedVod>?>(null) }
+    LaunchedEffect(Unit) { withFrameNanos { };firstKey.requestFocus();keyboard?.hide() }
     val state by vm.state.collectAsStateWithLifecycle()
     val history by vm.history.collectAsStateWithLifecycle()
     Row(horizontalArrangement = Arrangement.spacedBy(26.dp)) {
         Column(Modifier.width(325.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            OutlinedTextField(state.keyword, vm::input, label = { Text(stringResource(R.string.search_hint)) }, singleLine = true, modifier = Modifier.fillMaxWidth())
+            OutlinedTextField(state.keyword, vm::input,
+                readOnly = !editing, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(showKeyboardOnFocus = false),
+                label = { Text(stringResource(R.string.search_hint)) }, singleLine = true, modifier = Modifier.fillMaxWidth().onPreviewKeyEvent { event ->
+                    if(event.type==androidx.compose.ui.input.key.KeyEventType.KeyDown && event.nativeKeyEvent.keyCode==android.view.KeyEvent.KEYCODE_DPAD_CENTER) { editing=true;keyboard?.show();true }
+                    else if(event.type==androidx.compose.ui.input.key.KeyEventType.KeyDown && event.nativeKeyEvent.keyCode==android.view.KeyEvent.KEYCODE_DPAD_DOWN) { editing=false;firstKey.requestFocus();keyboard?.hide();true }
+                    else false
+                })
             // Every key is a TV button; system IME remains available through the text field.
             listOf("ABCDEF", "GHIJKL", "MNOPQR", "STUVWX", "YZ0123", "456789").forEach { row ->
                 Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-                    row.forEach { key -> TvAction(key.toString(), Modifier.width(50.dp)) { vm.input(state.keyword + key) } }
+                    row.forEach { key -> TvAction(key.toString(), Modifier.width(50.dp).then(if(key=='A')Modifier.focusRequester(firstKey)else Modifier)) { vm.input(state.keyword + key) } }
                 }
             }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -52,6 +64,7 @@ fun SearchScreen(vm: SearchViewModel, onDetail: (UnifiedVod) -> Unit) {
                         if (variants.size > 1) choices = variants else onDetail(vod)
                     })
             } }
+            if (state.searched && !state.loading) item { TvAction(stringResource(R.string.search_more), onClick = vm::searchMore) }
             if (state.searched && !state.loading && state.results.isEmpty()) item { Text(stringResource(R.string.no_search_results)) }
         }
     }

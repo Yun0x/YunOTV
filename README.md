@@ -1,6 +1,6 @@
 # Yuno TV
 
-Android TV / Kotlin / Compose for TV 的个人播放器与媒体源管理工程。包名 `com.yuno.tv`，版本 `0.2.0`。APK 最低支持 Android 8.0 / API 26。
+Android TV / Kotlin / Compose for TV 的个人播放器与媒体源管理工程。包名 `com.yuno.tv`，版本 `0.3.0`。APK 最低支持 Android 8.0 / API 26。
 
 ## macOS 构建
 
@@ -18,7 +18,7 @@ Android TV / Kotlin / Compose for TV 的个人播放器与媒体源管理工程�
 
 本机工具链：AGP 9.1.1 / Gradle 9.3.1 / Android Studio Embedded JDK 25 / compileSdk、targetSdk 37。所有模块 `minSdk = 26`。兼容依据和检查记录见 `docs/environment.md`、`docs/dependency-min-sdk.json`。
 
-Release 使用本项目 `.signing/local-release.p12` 的个人安装证书。首次在新目录构建 Release 前运行 `./scripts/create-local-signing.sh`。请备份自己的证书；Debug 与 Release 签名不同，互相覆盖安装时需要先卸载旧签名版本，卸载会删除应用数据。
+Release 使用本项目 `.signing/local-release.p12` 的个人安装证书。首次在新目录构建 Release 前运行 `./scripts/create-local-signing.sh`。密码保存在同样被 Git 忽略的 `.signing/local-release.properties`。本次升级没有更换已有证书。请备份这两个文件；Debug 与 Release 签名不同，互相覆盖安装时需要先卸载旧签名版本，卸载会删除应用数据。
 
 正式分发签名可通过环境变量 `YUNO_KEYSTORE`、`YUNO_STORE_PASSWORD`、`YUNO_KEY_ALIAS`、`YUNO_KEY_PASSWORD` 指定，工程不会保存这些凭据。
 
@@ -32,7 +32,7 @@ Release 使用本项目 `.signing/local-release.p12` 的个人安装证书。首
 
 首次启动自动导入根目录的默认 Source Bundle。也可进入“设置 → 配置源管理”自行添加远程 JSON/TXT/M3U URL，以及通过系统文件选择器批量导入文件；无配置时显示添加引导。部分电视未预装文件选择器时，需要先安装兼容的文件管理器。
 
-外部 TVBox JSON 仅在解析边界使用。`sites` 中 `type = 1`、HTTP(S) JSON CMS API 可用；`type = 0` 的 XML CMS、Spider/JAR/JS、解析器执行和 WebView 嗅探不在第一版范围。不支持类型会显示友好提示，不执行外部代码。
+外部 TVBox JSON 仅在解析边界使用。`sites` 中 `type = 1`、HTTP(S) JSON CMS API 可用；`type = 0` 的 XML CMS 和 WebView 嗅探仍未支持。Phase 3 增加隔离的 DRPY/Spider 执行和明确的 JSON HTTP 解析器，但当前真实 Bundle 的插件没有通过完整四步验证，不能视为日常兼容版已完成。详见 [Phase 3 验收](docs/phase3-acceptance.md)。
 
 TXT 的每行支持 `名称,URL`、`名称|URL`、单独 URL、UTF-8/BOM、CRLF/LF、`#`/`//` 注释和未标记的说明文字。HTTP(S) CMS 地址成为影视源；`.mp4/.m3u8/.ts` 地址成为直播/直链频道。对没有扩展名的 IPTV 地址，请选择 `IPTV` 格式。分组 TXT 支持 `分类,#genre#`，M3U 支持 EXTINF 名称、group-title、tvg-logo 和 EPG 地址。
 
@@ -76,7 +76,7 @@ python3 scripts/test-fixture-server.py --video /tmp/yuno-test.mp4
 
 ## 第一版扩展边界
 
-可选 EPG 地址已保留，但未解析节目单；复杂 Spider/JAR/JS 插件只保留 `SourceProvider` 扩展边界。当前版本仅播放用户有权访问的 HTTP(S) 媒体，不内置内容、不绕过 DRM、不破解付费平台。
+可选 EPG 地址已保留，但未解析节目单；复杂 Spider/JAR/JS 插件的支持范围以 Phase 3 实际验收结果为准。当前版本仅播放用户有权访问的 HTTP(S) 媒体，不内置内容、不绕过 DRM、不破解付费平台。
 
 
 ## 第二阶段
@@ -93,4 +93,4 @@ python3 scripts/test-fixture-server.py --video /tmp/yuno-test.mp4
 ./scripts/verify-remote-sources.sh
 ```
 
-远程统计、功能验证、设备范围、APK 路径及限制见 [第二阶段验证](docs/phase2-verification.md)。搜索、配置数量和直播清单展开均设置上限，以控制弱电视的内存与网络开销。JAR/Spider/JS、XML CMS 和 EPG 节目单仍不执行。
+远程统计、功能验证、设备范围、APK 路径及限制见 [第二阶段验证](docs/phase2-verification.md)。搜索、配置数量和直播清单展开均设置上限，以控制弱电视的内存与网络开销。这份第二阶段记录对应当时的实现；第三阶段的运行时、设备实测和限制见 [Phase 3 验收](docs/phase3-acceptance.md)。

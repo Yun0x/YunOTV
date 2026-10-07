@@ -18,6 +18,10 @@ class YunoApplication : Application(), ImageLoaderFactory {
         private set
     override fun onCreate() {
         super.onCreate()
+        if (android.os.Process.myUid() != applicationInfo.uid) return
+        val process = if (android.os.Build.VERSION.SDK_INT >= 28) getProcessName() else
+            (getSystemService(ACTIVITY_SERVICE) as? android.app.ActivityManager)?.runningAppProcesses?.firstOrNull { it.pid == android.os.Process.myPid() }?.processName.orEmpty()
+        if (android.os.Process.myUid() != applicationInfo.uid || process.startsWith("$packageName:")) return
         container = AppContainer(this)
         // Media3 messages may contain a remote URI or server response. Export only safe event IDs.
         androidx.media3.common.util.Log.setLogger(object : androidx.media3.common.util.Log.Logger {
@@ -43,7 +47,9 @@ class AppContainer(app: Application) {
     val library = LibraryRepository(database)
     val settings = SettingsRepository(app)
     val configs = ConfigRepository(SourceStore(database, app.filesDir.resolve("config-cache")), network, settings, scope, logger) { app.assets.open("sources.txt.json").bufferedReader(Charsets.UTF_8).use { it.readText() } }
-    val providers = ProviderRegistry(network, app.filesDir.resolve("media-cache"))
+    val runtime = com.yuno.tv.core.runtime.CompatibilityRuntime(app, network.http, app.filesDir.resolve("plugin-cache"))
+    val providers = ProviderRegistry(network, app.filesDir.resolve("media-cache"), runtime::provider)
+    val playback = PlaybackCoordinator(providers, network.http)
     val search = SearchAggregator(providers)
     init { scope.launch { providers.healthChecker.restore(); configs.initialize() } }
 }

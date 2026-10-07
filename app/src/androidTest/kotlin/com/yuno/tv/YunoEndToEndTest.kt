@@ -101,7 +101,7 @@ class YunoEndToEndTest {
         assertEquals(2, vod.lines.size); assertEquals(2, vod.lines[0].episodes.size)
         android.util.Log.i("YunoQA", "launch_ui")
         app.startActivity(Intent(app, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK))
-        text("最近更新")
+        text("Yuno Test 1")
         delay(500)
         screenshot("home")
         // A phone emulator may still be in touch mode after installation. The first
@@ -198,19 +198,10 @@ class YunoEndToEndTest {
         click("Yuno Test 3")
         text("播放线路与剧集")
         click("从头播放")
-        var errorButton: AccessibilityNodeInfo? = text("重试")
-        while (errorButton != null && !errorButton.isFocusable) errorButton = errorButton.parent
-        assertTrue("Playback error must focus the retry button", errorButton?.isFocused == true)
-        screenshot("playback-error")
-        key(android.view.KeyEvent.KEYCODE_DPAD_UP)
-        key(android.view.KeyEvent.KEYCODE_DPAD_RIGHT)
-        key(android.view.KeyEvent.KEYCODE_DPAD_CENTER)
-        text("Backup")
-        click("Backup")
         delay(2500)
-        key(android.view.KeyEvent.KEYCODE_MEDIA_PLAY)
-        key(android.view.KeyEvent.KEYCODE_DPAD_UP) // opens hidden controls and resets their idle timer without toggling playback
-        text("暂停") // recover from HTTP 404 by selecting the working line
+        key(android.view.KeyEvent.KEYCODE_DPAD_UP)
+        text("暂停") // Phase 3 automatically recovers once on Backup after Direct's HTTP 404.
+        screenshot("playback-fallback")
         key(android.view.KeyEvent.KEYCODE_BACK)
         key(android.view.KeyEvent.KEYCODE_BACK)
         text("播放线路与剧集")

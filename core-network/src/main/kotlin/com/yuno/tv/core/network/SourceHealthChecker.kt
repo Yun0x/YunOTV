@@ -12,7 +12,7 @@ import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
 import java.io.File
 
-/** Health comes from real bounded requests, never executing a site's external runtime. */
+/** Operation and playback evidence are kept locally. Concurrent completions merge atomically. */
 class SourceHealthChecker(private val file: File? = null) {
     private val _health = MutableStateFlow<Map<String, SourceHealth>>(emptyMap())
     val health = _health.asStateFlow()
@@ -20,26 +20,44 @@ class SourceHealthChecker(private val file: File? = null) {
     private val diskMutex = Mutex()
     suspend fun restore() = withContext(Dispatchers.IO) {
         val saved: Map<String, SourceHealth> = runCatching {
-            if (file?.isFile == true && file.length() < 256_000) gson.fromJson<Map<String, SourceHealth>>(file.readText(), object : TypeToken<Map<String, SourceHealth>>() {}.type) else emptyMap<String, SourceHealth>()
+            if (file?.isFile == true && file.length() < 2*1024*1024) gson.fromJson<Map<String, SourceHealth>>(file.readText(), object : TypeToken<Map<String, SourceHealth>>() {}.type) else emptyMap<String, SourceHealth>()
         }.getOrDefault(emptyMap())
         _health.value = saved
     }
-    suspend fun <T> measure(site: UnifiedSite, block: suspend () -> T): T {
+    suspend fun <T> measure(site: UnifiedSite, operation: String = "config", block: suspend () -> T): T {
         val start = System.currentTimeMillis()
         try {
             val result = block()
-            record(site.id, SourceHealth(SourceHealthStatus.AVAILABLE, System.currentTimeMillis(), System.currentTimeMillis()-start, System.currentTimeMillis()))
+            record(site.id, operation, true, System.currentTimeMillis()-start)
             return result
         } catch (error: Exception) {
             error.rethrowCancellation()
-            val old = _health.value[site.id]
-            record(site.id, SourceHealth(if ((old?.lastSuccess ?: 0) > 0) SourceHealthStatus.DEGRADED else SourceHealthStatus.UNAVAILABLE,
-                System.currentTimeMillis(), System.currentTimeMillis()-start, old?.lastSuccess ?: 0, error.friendlyCode()))
+            record(site.id, operation, false, System.currentTimeMillis()-start, error.friendlyCode())
             throw error
         }
     }
-    private suspend fun record(id: String, value: SourceHealth) {
-        _health.update { (it + (id to value)).entries.sortedByDescending { entry -> entry.value.lastChecked }.take(256).associate { entry -> entry.toPair() } }
+    suspend fun playback(site: UnifiedSite, request: PlaybackRequest, success: Boolean) {
+        record(site.id, "decode", success, 0, if(success)null else ErrorCode.PLAYBACK, request.vod.lines.getOrNull(request.lineIndex)?.id)
+    }
+    fun lineScore(sourceId: String, lineId: String): Int = _health.value[sourceId]?.lines?.get(lineId)?.score ?: 0
+    private suspend fun record(id: String, operation: String, success: Boolean, latency: Long,
+        error: ErrorCode? = null, line: String? = null) {
+        val now = System.currentTimeMillis()
+        fun result(previous: OperationHealth): OperationHealth = if(success) previous.copy(success=previous.success+1,
+            consecutiveFailures=0,lastSuccess=now,latencyMs=latency) else previous.copy(failure=previous.failure+1,
+            consecutiveFailures=previous.consecutiveFailures+1,latencyMs=latency)
+        _health.update { current ->
+            val old=current[id] ?: SourceHealth()
+            val operations=old.operations + (operation to result(old.operations[operation] ?: OperationHealth()))
+            val lines=if(line==null)old.lines else (old.lines + (line to result(old.lines[line] ?: OperationHealth())))
+                .entries.sortedByDescending { it.value.lastSuccess }.take(32).associate { it.toPair() }
+            val status=if(success || old.lastSuccess>0) {
+                if(operations.values.any { it.consecutiveFailures>0 })SourceHealthStatus.DEGRADED else SourceHealthStatus.AVAILABLE
+            } else SourceHealthStatus.UNAVAILABLE
+            (current + (id to old.copy(status=status,lastChecked=now,latencyMs=latency,
+                lastSuccess=if(success)now else old.lastSuccess,error=error,operations=operations,lines=lines)))
+                .entries.sortedByDescending { it.value.lastChecked }.take(256).associate { it.toPair() }
+        }
         diskMutex.withLock {
             val json = withContext(Dispatchers.Default) { gson.toJson(_health.value) }
             withContext(Dispatchers.IO) { runCatching { file?.let { target ->
@@ -48,7 +66,7 @@ class SourceHealthChecker(private val file: File? = null) {
             } } }
         }
     }
-    fun ordered(sites: List<UnifiedSite>): List<UnifiedSite> = sites.sortedWith(compareByDescending<UnifiedSite> { it.origin.priority }
+    fun ordered(sites: List<UnifiedSite>): List<UnifiedSite> = sites.sortedWith(compareByDescending<UnifiedSite> { _health.value[it.id]?.operations.orEmpty().values.sumOf { op -> op.score } }.thenBy { if(it.capability.status==CapabilityStatus.SUPPORTED)0 else 1 }.thenByDescending { it.origin.priority }
         .thenBy { when (_health.value[it.id]?.status) { SourceHealthStatus.AVAILABLE -> 0; SourceHealthStatus.UNKNOWN, null -> 1; SourceHealthStatus.DEGRADED -> 2; else -> 3 } }
         .thenByDescending { _health.value[it.id]?.lastSuccess ?: 0 }
         .thenBy { _health.value[it.id]?.latencyMs ?: Long.MAX_VALUE })

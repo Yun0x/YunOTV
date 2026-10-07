@@ -1,4 +1,5 @@
 import java.util.zip.ZipFile
+import java.util.Properties
 
 plugins { id("com.android.application"); id("org.jetbrains.kotlin.plugin.compose") }
 android {
@@ -10,15 +11,18 @@ android {
         applicationId = "com.yuno.tv"
         minSdk = 26
         targetSdk = 37
-        versionCode = 2
-        versionName = "0.2.0"
+        versionCode = 3
+        versionName = "0.3.0"
     }
     signingConfigs {
         create("localRelease") {
             storeFile = rootProject.file(".signing/local-release.p12")
-            storePassword = "yunotv-local"
+            val credentials = Properties().apply {
+                rootProject.file(".signing/local-release.properties").takeIf { it.isFile }?.inputStream()?.use { load(it) }
+            }
+            storePassword = credentials.getProperty("storePassword")
             keyAlias = "yunotv"
-            keyPassword = "yunotv-local"
+            keyPassword = credentials.getProperty("keyPassword")
         }
         if (System.getenv("YUNO_KEYSTORE") != null) {
             create("distribution") {
@@ -30,6 +34,9 @@ android {
         }
     }
     buildTypes {
+        if (providers.gradleProperty("yunoQaReleaseSignature").orNull == "true") {
+            debug { signingConfig = signingConfigs.getByName("localRelease") }
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -75,6 +82,7 @@ dependencies {
     androidTestImplementation("androidx.test:runner:1.6.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
     androidTestImplementation("androidx.test.uiautomator:uiautomator:2.3.0")
+    implementation(project(":core-runtime"))
     implementation(project(":core-ui"))
     implementation(project(":core-config"))
     implementation(project(":core-player"))

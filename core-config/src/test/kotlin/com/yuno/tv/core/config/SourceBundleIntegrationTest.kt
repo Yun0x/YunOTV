@@ -37,6 +37,7 @@ class SourceBundleIntegrationTest {
             "capabilities" to CapabilityKind.entries.associate { kind -> kind.name to result.config.sites.count { it.capability.kind == kind } },
             "liveChannels" to result.config.lives.size, "diagnostics" to result.diagnostics)
         root.resolve("docs/default-bundle-integration.json").writeText(GsonBuilder().setPrettyPrinting().create().toJson(report))
+        System.getenv("YUNO_INVENTORY_DIR")?.let { path -> File(path).apply { mkdirs() }.resolve("unified-sites.json").writeText(GsonBuilder().create().toJson(result.config.sites)) }
         assertEquals(4, result.statistics.bundleSourceCount); assertEquals(4,result.statistics.enabledConfigCount)
         assertTrue(result.config.sites.isNotEmpty()); assertTrue(result.config.sites.any { it.supported })
         assertTrue(result.config.sites.size < result.statistics.parsedSiteCount)

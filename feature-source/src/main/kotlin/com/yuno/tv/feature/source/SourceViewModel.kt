@@ -14,12 +14,13 @@ import kotlinx.coroutines.flow.*
 
 data class SourceUiState(val busy: Boolean = false, val error: ErrorCode? = null, val imported: Int = 0,
     val warnings: List<ConfigWarning>? = null)
-class SourceViewModel(private val repository: ConfigRepository, context: Context, private val registry: com.yuno.tv.core.network.ProviderRegistry? = null) : ViewModel() {
+class SourceViewModel(private val repository: ConfigRepository, context: Context, private val registry: com.yuno.tv.core.network.ProviderRegistry? = null, runtime: com.yuno.tv.core.runtime.CompatibilityRuntime? = null) : ViewModel() {
     private val resolver = context.applicationContext.contentResolver
     val sources = repository.sources
     val config = repository.config
     val diagnostics = repository.diagnostics
     val statistics = repository.statistics
+    val runtimeDiagnostics = runtime?.diagnostics ?: MutableStateFlow<Map<String,com.yuno.tv.core.runtime.RuntimeDiagnostic>>(emptyMap())
     val health = registry?.health ?: MutableStateFlow<Map<String, SourceHealth>>(emptyMap())
     fun checkHealth() = action { registry?.healthChecker?.check(repository.config.value.sites, registry::provider) }
     private val _state = MutableStateFlow(SourceUiState())

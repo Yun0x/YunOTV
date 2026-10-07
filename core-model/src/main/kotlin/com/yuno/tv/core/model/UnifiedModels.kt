@@ -42,6 +42,9 @@ sealed interface NetworkResult<out T> {
 }
 
 interface SourceProvider {
+    suspend fun resolvePlayback(episode: UnifiedEpisode, line: UnifiedLine): PlaybackCandidate =
+        PlaybackCandidate(episode.url, headers = episode.headers, line = line.name, episode = episode.name, contentType = episode.contentType)
+
     suspend fun getHome(): HomeResult
     suspend fun search(keyword: String): List<UnifiedMediaItem>
     suspend fun getCategories(): List<UnifiedCategory>

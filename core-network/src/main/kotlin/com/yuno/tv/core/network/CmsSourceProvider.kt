@@ -20,21 +20,26 @@ interface CmsApi {
 data class CmsResponse(val list: List<CmsVod>, val categories: List<UnifiedCategory>)
 data class CmsVod(val value: JsonObject)
 
-class SourceProviderRegistry(network: NetworkClient, cacheDirectory: java.io.File? = null) {
+class SourceProviderRegistry(network: NetworkClient, cacheDirectory: java.io.File? = null, private val pluginProvider: ((UnifiedSite) -> SourceProvider)? = null) {
     private val api = Retrofit.Builder().baseUrl("https://localhost/").client(network.http.newBuilder().callTimeout(12, java.util.concurrent.TimeUnit.SECONDS).readTimeout(12, java.util.concurrent.TimeUnit.SECONDS).build()).build().create(CmsApi::class.java)
     val healthChecker = SourceHealthChecker(cacheDirectory?.resolve("source-health.json"))
     val health = healthChecker.health
     private val detailCache = MediaContentCache(cacheDirectory)
     fun provider(site: UnifiedSite): SourceProvider {
         if (!site.supported) throw SourceException(ErrorCode.UNSUPPORTED)
-        val delegate = if (site.capability.kind == CapabilityKind.DIRECT_MEDIA) DirectMediaSourceProvider(site) else CmsSourceProvider(site, api)
+        val delegate = when(site.capability.kind) {
+            CapabilityKind.DIRECT_MEDIA -> DirectMediaSourceProvider(site)
+            CapabilityKind.DRPY_JS, CapabilityKind.SPIDER_JAR -> pluginProvider?.invoke(site) ?: throw SourceException(ErrorCode.UNSUPPORTED)
+            else -> CmsSourceProvider(site, api)
+        }
         return object : SourceProvider {
-            override suspend fun getHome() = healthChecker.measure(site) { delegate.getHome() }
-            override suspend fun search(keyword: String) = healthChecker.measure(site) { delegate.search(keyword) }
+            override suspend fun resolvePlayback(episode: UnifiedEpisode, line: UnifiedLine) = healthChecker.measure(site, "play") { delegate.resolvePlayback(episode, line) }
+            override suspend fun getHome() = healthChecker.measure(site, "home") { delegate.getHome() }
+            override suspend fun search(keyword: String) = healthChecker.measure(site, "search") { delegate.search(keyword) }
             override suspend fun getCategories() = delegate.getCategories()
             override suspend fun getCategory(categoryId: String, page: Int) = delegate.getCategory(categoryId, page)
             override suspend fun getDetail(vodId: String): UnifiedVod {
-                try { return healthChecker.measure(site) { delegate.getDetail(vodId) }.also { detailCache.saveDetail(it) } }
+                try { return healthChecker.measure(site, "detail") { delegate.getDetail(vodId) }.also { detailCache.saveDetail(it) } }
                 catch (error: Exception) { error.rethrowCancellation(); return detailCache.detail(site.id, vodId) ?: throw error }
             }
         }

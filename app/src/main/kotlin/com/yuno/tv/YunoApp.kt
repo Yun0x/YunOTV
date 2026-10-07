@@ -56,8 +56,8 @@ fun YunoApp() {
     val search: SearchViewModel = viewModel(factory = ModelFactory { SearchViewModel(container.configs, container.library, container.search) })
     val history: HistoryViewModel = viewModel(factory = ModelFactory { HistoryViewModel(container.library) })
     val favorite: FavoriteViewModel = viewModel(factory = ModelFactory { FavoriteViewModel(container.library) })
-    val settings: SettingsViewModel = viewModel(factory = ModelFactory { SettingsViewModel(container.settings, container.configs, container.library, container.logger) })
-    val sources: SourceViewModel = viewModel(factory = ModelFactory { SourceViewModel(container.configs, context, container.providers) })
+    val settings: SettingsViewModel = viewModel(factory = ModelFactory { SettingsViewModel(container.settings, container.configs, container.library, container.logger, container.runtime) })
+    val sources: SourceViewModel = viewModel(factory = ModelFactory { SourceViewModel(container.configs, context, container.providers, container.runtime) })
     val live: LiveViewModel = viewModel(factory = ModelFactory { LiveViewModel(container.configs, container.library, playerFactory) })
     var destination by rememberSaveable { mutableStateOf(Destination.HOME) }
     var showSources by rememberSaveable { mutableStateOf(false) }
@@ -78,7 +78,11 @@ fun YunoApp() {
     if (activePlayback != null) {
         val request = activePlayback!!
         val vm = screenModel(playbackToken) {
-            PlayerViewModel(request, playerFactory, container.library, container.settings, container.scope, container.logger)
+            PlayerViewModel(request, playerFactory, container.library, container.settings, container.scope, container.logger,
+                resolvePlayback = { container.playback.resolve(it,container.configs.config.value) },
+                playbackOutcome = { item, success -> container.configs.config.value.sites.firstOrNull { it.id==item.vod.sourceId }?.let { site ->
+                    container.providers.healthChecker.playback(site,item,success)
+                }; Unit }, lineScore = { item,index -> container.providers.healthChecker.lineScore(item.vod.sourceId,item.vod.lines[index].id) })
         }
         PlayerScreen(vm) { activePlayback = null }
         return

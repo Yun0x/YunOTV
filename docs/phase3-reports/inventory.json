@@ -1,0 +1,680 @@
+{
+  "siteCount": 1787,
+  "drpySites": 174,
+  "spiderSites": 1459,
+  "uniqueJarUrls": 4,
+  "uniqueClasses": 784,
+  "uniqueDownloadedJarHashes": 1,
+  "jars": [
+    {
+      "url": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/feishu-sync/%E4%B8%80%E6%9C%A8%E6%BA%90/JAR/XB%E5%8C%85jar/LIBVIO.jar",
+      "sites": 1315,
+      "status": "FAILED",
+      "error": "HTTP_404"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/exports/deps/feishu-sync/%E4%B8%80%E6%9C%A8%E6%BA%90/JAR/XB%E5%8C%85jar/LIBVIO.jar",
+      "sites": 75,
+      "status": "FAILED",
+      "error": "HTTP_404"
+    },
+    {
+      "url": "https://www.252035.xyz/z/custom_spider.jar",
+      "sites": 38,
+      "status": "FAILED",
+      "error": "timeout",
+      "headStatus": 200
+    },
+    {
+      "url": "https://github.allproxy.dpdns.org/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/main/custom_spider.jar",
+      "sites": 31,
+      "sha256": "cf4a252873ac102aad89cd4734440ca27f693268671963cbe1e22e24e2923907",
+      "bytes": 493982,
+      "status": "DOWNLOADED",
+      "dexEntries": [
+        "classes.dex"
+      ],
+      "jarSites": 31
+    }
+  ],
+  "sampleCount": 24,
+  "jsHelpers": {
+    "fetch": 35,
+    "cheerio": 69,
+    "CryptoJS": 381,
+    "request": 223,
+    "base64Encode": 13,
+    "base64Decode": 38,
+    "md5": 13,
+    "pdfh": 88,
+    "pdfa": 55,
+    "pd": 40,
+    "post": 50,
+    "setItem": 30,
+    "local": 39,
+    "getItem": 34,
+    "require": 13,
+    "req": 30,
+    "jsp": 3
+  },
+  "sample": [
+    {
+      "name": "💥678💥",
+      "runtime": {
+        "sha256": "67f4f6b460db1ec7ef50585953ce826c5263ca91d72958490ef4702b4e154fe1",
+        "bytes": 111826,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "cheerio": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "SVIP｜短剧",
+      "runtime": {
+        "sha256": "cbfd7b23f86b07f8fa55ba85aae66af430b2a1c5501160f8867e1852661adba2",
+        "bytes": 71463,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 7,
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "a40fb61b0fca17c657228990c3a69088ceaa5627e1003364c18f0ede508cde2c",
+        "bytes": 4062,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "request": 4
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "[367ms|直播] 路漫漫",
+      "runtime": {
+        "sha256": "67f4f6b460db1ec7ef50585953ce826c5263ca91d72958490ef4702b4e154fe1",
+        "bytes": 111826,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "cheerio": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "101ddf4e307b07184f9c5c41948c41c5e0af04232c86f289b2ba6aa97488366a",
+        "bytes": 16510,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "CryptoJS": 6,
+          "request": 2,
+          "base64Decode": 1,
+          "fetch": 4,
+          "post": 2
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "优酷[js]",
+      "runtime": {
+        "sha256": "e675b8b6de7380fe6a1e5bd5d6d4c92868f4659f49c9a9170a10b2db3e7c847b",
+        "bytes": 43475,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 4,
+          "CryptoJS": 24,
+          "request": 12,
+          "base64Encode": 1,
+          "base64Decode": 2,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "post": 3,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "2ef731842b1555dbf68394ad4ee044addc3043b7ff451d56e878d68345a1c1a6",
+        "bytes": 29372,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "request": 3,
+          "getItem": 2,
+          "fetch": 3,
+          "setItem": 1
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "企鹅｜X",
+      "runtime": {
+        "status": "FAILED",
+        "error": "timeout"
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "晚霞|自定",
+      "runtime": {
+        "sha256": "bf21a7489a5bbb1e04e6ad11a83e47c958b4da1610a5c272c0d2ddd5822f47d2",
+        "bytes": 138,
+        "status": "DOWNLOADED",
+        "helpers": {},
+        "async": false
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "💥360影视💥",
+      "runtime": {
+        "sha256": "67f4f6b460db1ec7ef50585953ce826c5263ca91d72958490ef4702b4e154fe1",
+        "bytes": 111826,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "cheerio": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "685aaf3e5b361c7380f2d5ced19cc0903ef15f762e29cf2f54d5a877ef1fc869",
+        "bytes": 2963,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "request": 1,
+          "fetch": 2
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "娃娃｜影视",
+      "runtime": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "🎇｜奇奇｜解析",
+      "runtime": {
+        "sha256": "9565b9a320938c3977e620cb0aa00faa573ec3c33cd1b1faf3ae7857c796bbb0",
+        "bytes": 111856,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "cheerio": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "📚┃儿童┃启蒙",
+      "runtime": {
+        "sha256": "d593d59d5ab6dfe1df73da98af6e442b1e1e15bc84269a1e72de9e57134cc749",
+        "bytes": 40508,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "优酷视频",
+      "runtime": {
+        "status": "FAILED",
+        "error": "URLError"
+      },
+      "script": {
+        "sha256": "b1ad2cb9e8b7444d02fb70a2dc04159e0fcbd44733e54b49c5f2dcf4a1341942",
+        "bytes": 63731,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "fetch": 4,
+          "getItem": 2,
+          "setItem": 1,
+          "request": 2
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "💥优酷💥",
+      "runtime": {
+        "sha256": "3527012aed2f6dcf7edd8a6073a2a5fd19bdf271cd9b177ac828f20dc9d504ba",
+        "bytes": 67948,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 6,
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "a65424611111e0cca966aeb2731fb2eaf2c1ffd00d039d1e39456ea973ffc221",
+        "bytes": 66029,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "fetch": 4,
+          "getItem": 2,
+          "setItem": 1,
+          "request": 2
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "[367ms|直播] 🌾去看动漫",
+      "runtime": {
+        "sha256": "4bb2a618a4488bb28eabbafc46b5a1daa0643f166a3da5ebd3d1398c5eb95549",
+        "bytes": 40668,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 4,
+          "CryptoJS": 24,
+          "request": 12,
+          "base64Encode": 1,
+          "base64Decode": 2,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "post": 3,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "儿童┃启蒙",
+      "runtime": {
+        "status": "FAILED",
+        "error": "URLError"
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "310｜看球",
+      "runtime": {
+        "sha256": "9f681a4f7d657a0e3547252ea16faab9a7a3c0dafb29eb9e21ebddd3ff80b683",
+        "bytes": 108672,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 7,
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "2112b9345ed2e794586a1ced96203b44478c676c9cd7866ad590e31c3886d6a4",
+        "bytes": 503,
+        "status": "DOWNLOADED",
+        "helpers": {},
+        "async": false
+      }
+    },
+    {
+      "name": "88看球[js]",
+      "runtime": {
+        "sha256": "7638b7137d9eee94de4999efa4c8a7ae22ec1a2336fc29172414e2af0c9baca2",
+        "bytes": 67312,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 7,
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "ed80b602235a87d2ed10debe916755c83dbbcf37d8df043f51d7c7771f695a49",
+        "bytes": 1958,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "base64Decode": 2,
+          "request": 1
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "♻️优酷(官源)",
+      "runtime": {
+        "sha256": "10fbf0af7184d685116f254464d3d06520580cd9f06206cc22d892a3ae77a79e",
+        "bytes": 40922,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 4,
+          "CryptoJS": 24,
+          "request": 12,
+          "base64Encode": 1,
+          "base64Decode": 2,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "post": 3,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "64d1fef804c03c1f76ff53e826c0debf3eb78ce4d86ee5ad77ca9c4d1660467e",
+        "bytes": 29205,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "request": 3,
+          "getItem": 2,
+          "fetch": 3,
+          "setItem": 1
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "(js)360影视┃🥎",
+      "runtime": {
+        "sha256": "2d24dfd51bb8d5364c5f455bf1420c142e647502f365a5997b7621d1c9af01bc",
+        "bytes": 754176,
+        "status": "DOWNLOADED",
+        "helpers": {},
+        "async": false
+      },
+      "script": {}
+    },
+    {
+      "name": "*直播ddd",
+      "runtime": {
+        "sha256": "b35fb6def390313f6c6e7b95738985197581cf0836f051a84462c7467c885c24",
+        "bytes": 15344,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "req": 2
+        },
+        "async": false
+      },
+      "script": {
+        "status": "FAILED",
+        "error": "HTTPError"
+      }
+    },
+    {
+      "name": "DRPY┃AGE动漫",
+      "runtime": {
+        "sha256": "c3d7766c72686570c49d61e5727fdf892cf53cff5be1104f1b2ff2f5c285e2f8",
+        "bytes": 38663,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 8,
+          "CryptoJS": 24,
+          "request": 12,
+          "base64Encode": 1,
+          "base64Decode": 2,
+          "md5": 1,
+          "pd": 3,
+          "pdfh": 6,
+          "pdfa": 3,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "post": 3
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "cba388422b436fb50e48dddde679f8b25680db0250f2157a1d78fbdf0c75ba33",
+        "bytes": 16922,
+        "status": "DOWNLOADED",
+        "helpers": {},
+        "async": false
+      }
+    },
+    {
+      "name": "[367ms|直播] 👖裤佬丨Emby丨JS",
+      "runtime": {
+        "sha256": "1fb0ae666144ed77ebdb38b1b6eb8fbfd3c369a4602de318c13c50c48fe64261",
+        "bytes": 8326,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "req": 9
+        },
+        "async": false
+      },
+      "script": {}
+    },
+    {
+      "name": "[590ms|5] 芒果TV[追剧]",
+      "runtime": {
+        "sha256": "3527012aed2f6dcf7edd8a6073a2a5fd19bdf271cd9b177ac828f20dc9d504ba",
+        "bytes": 67948,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "cheerio": 6,
+          "CryptoJS": 31,
+          "request": 16,
+          "base64Encode": 1,
+          "base64Decode": 3,
+          "md5": 1,
+          "pdfh": 5,
+          "pdfa": 4,
+          "pd": 3,
+          "post": 4,
+          "setItem": 2,
+          "local": 3,
+          "getItem": 2,
+          "require": 1,
+          "req": 1,
+          "fetch": 1
+        },
+        "async": false
+      },
+      "script": {
+        "sha256": "dc5baa12b39f7e973d3a563d877e4df344526730904c7f7a7e1f73dc8fd400f9",
+        "bytes": 10553,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "request": 6,
+          "fetch": 2,
+          "jsp": 3,
+          "pdfh": 11,
+          "pd": 1
+        },
+        "async": false
+      }
+    },
+    {
+      "name": "☀星星🔹秒播",
+      "runtime": {
+        "sha256": "e546e3408ed54d8ddf3d7a689de90279bd93672e656a463898f1d664cce38136",
+        "bytes": 14296,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "request": 7,
+          "req": 1
+        },
+        "async": true
+      },
+      "script": {}
+    },
+    {
+      "name": "☀永乐🔹视频",
+      "runtime": {
+        "sha256": "64f5beda6f8742144764543c6bf6d8c6726451dd93ca6bf62140dd87fb06e7fe",
+        "bytes": 5655,
+        "status": "DOWNLOADED",
+        "helpers": {
+          "pdfa": 4,
+          "pdfh": 11,
+          "req": 5
+        },
+        "async": false
+      },
+      "script": {}
+    }
+  ]
+}

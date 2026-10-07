@@ -21,6 +21,7 @@ fun SourceDiagnosticsScreen(vm: SourceViewModel, onBack: () -> Unit) {
     val config by vm.config.collectAsStateWithLifecycle()
     val health by vm.health.collectAsStateWithLifecycle()
     val state by vm.state.collectAsStateWithLifecycle()
+    val runtimes by vm.runtimeDiagnostics.collectAsStateWithLifecycle()
     var kind by remember { mutableStateOf<CapabilityKind?>(null) }
     val sites = remember(config.sites, kind) { config.sites.filter { kind == null || it.capability.kind == kind } }
     Column(verticalArrangement = Arrangement.spacedBy(14.dp)) {
@@ -51,6 +52,14 @@ fun SourceDiagnosticsScreen(vm: SourceViewModel, onBack: () -> Unit) {
             items(sites, key = { it.id }) { site ->
                 TvAction(site.name + " · " + site.capability.kind.name + " · " + site.capability.status.name + " · " +
                     (health[site.id]?.status?.name ?: SourceHealthStatus.UNKNOWN.name), Modifier.fillMaxWidth()) { vm.showWarnings(site.origin.sourceId) }
+                runtimes[site.id]?.let { runtime ->
+                    Text("${runtime.runtime} · ${runtime.hash.take(12)} · ${runtime.latencyMs} ms",color=CinemaColors.muted)
+                    Text(redactedSourceUrl(runtime.api),maxLines=1)
+                    if(runtime.jar.isNotBlank())Text(redactedSourceUrl(runtime.jar),maxLines=1)
+                    Text(runtime.operations.entries.joinToString(" · ") { "${it.key}: ${if(it.value) "PASS" else "FAIL"}" },color=CinemaColors.muted)
+                    if(runtime.lastError.isNotBlank())Text(runtime.lastError,color=YunoColors.Warning)
+                }
+                health[site.id]?.operations?.let { operations -> Text(operations.entries.joinToString(" · ") { "${it.key}: ${it.value.success}/${it.value.failure}" },color=CinemaColors.muted) }
                 Text(site.origins.joinToString(" · ") { it.sourceName }, color = CinemaColors.muted, maxLines = 1)
             }
         }
