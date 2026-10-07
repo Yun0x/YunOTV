@@ -1,0 +1,11 @@
+{
+  "install": "PASS",
+  "launch": "PASS",
+  "coldActivityMs": 701,
+  "remoteControlNavigation": "PASS",
+  "manualConfig": "PASS",
+  "detail": "PASS",
+  "originalMp4Playback": "PASS",
+  "historyPercent": 76,
+  "favoriteAfterProcessRestart": "PASS"
+}

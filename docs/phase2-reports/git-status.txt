@@ -1,0 +1,40 @@
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   README.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.gitignore
+	.idea/
+	app/
+	build.gradle.kts
+	core-config/
+	core-database/
+	core-model/
+	core-network/
+	core-player/
+	core-ui/
+	core/
+	docs/
+	feature-detail/
+	feature-favorite/
+	feature-history/
+	feature-home/
+	feature-live/
+	feature-player/
+	feature-search/
+	feature-settings/
+	feature-source/
+	gradle.properties
+	gradle/
+	gradlew
+	logo.png
+	scripts/
+	settings.gradle.kts
+	sources.txt.json
+
+no changes added to commit (use "git add" and/or "git commit -a")

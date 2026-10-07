@@ -1,0 +1,34 @@
+{
+  "statistics": {
+    "brokenSiteCount": 0,
+    "bundleSourceCount": 4,
+    "deduplicatedSiteCount": 1852,
+    "downloadFailedConfigCount": 5,
+    "downloadedConfigCount": 7,
+    "enabledConfigCount": 4,
+    "lastUpdate": 1791371577704,
+    "parsedSiteCount": 2015,
+    "partialSiteCount": 1,
+    "resolvedConfigCount": 15,
+    "supportedSiteCount": 100,
+    "unsupportedSiteCount": 1751
+  },
+  "capabilities": {
+    "CMS_API": 100,
+    "DIRECT_MEDIA": 0,
+    "LIVE_M3U": 1,
+    "TVBOX_TYPE0": 29,
+    "TVBOX_TYPE1": 0,
+    "TVBOX_TYPE3": 2,
+    "DRPY_JS": 176,
+    "SPIDER_JAR": 1517,
+    "LOCAL": 0,
+    "UNKNOWN": 27
+  },
+  "sourceName": "10-如意",
+  "homeCount": 20,
+  "searchCount": 1,
+  "episodeCount": 20,
+  "playbackUrlResolved": true,
+  "failedSourceNames": []
+}

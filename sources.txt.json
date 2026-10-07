@@ -1,0 +1,36 @@
+ {
+  "format": "yunotv-source-bundle",
+  "version": 1,
+  "mergePolicy": {
+    "deduplicate": true,
+    "preferHealthy": true,
+    "timeoutSeconds": 12,
+    "maxDepth": 4
+  },
+  "sources": [
+    {
+      "name": "healthy-aggregated",
+      "url": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/exports/healthy.json",
+      "priority": 100,
+      "enabled": true
+    },
+    {
+      "name": "recommended-aggregated",
+      "url": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/tvbox_recommended.json",
+      "priority": 90,
+      "enabled": true
+    },
+    {
+      "name": "fanchang-public",
+      "url": "https://raw.githubusercontent.com/FanchangWang/tvbox_config/main/dist/tvbox.json",
+      "priority": 70,
+      "enabled": true
+    },
+    {
+      "name": "jiusanzhou-public",
+      "url": "https://raw.githubusercontent.com/jiusanzhou/tvbox/main/tvbox.json",
+      "priority": 60,
+      "enabled": true
+    }
+  ]
+}

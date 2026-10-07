@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-07",
+  "applicationId": "com.yuno.tv",
+  "versionName": "0.2.0",
+  "versionCode": 2,
+  "minSdk": 26,
+  "targetSdk": 37,
+  "compileSdk": 37,
+  "projectJdk": "Android Studio Embedded JDK 25.0.3 ARM64",
+  "systemJava": "Java 8u341",
+  "unitTests": {
+    "tests": 36,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "appLint": {
+    "errors": 0,
+    "warnings": 53
+  },
+  "runtimeAarCount": 76,
+  "apks": {
+    "debug": {
+      "path": "/Users/yuno/java/Android/YunoTV/app/build/outputs/apk/debug/app-debug.apk",
+      "bytes": 18203139,
+      "MiB": 17.36,
+      "sha256": "8d286cf93e49f522836719b2490a07281a388d1f8d5a8d5f13b9a13ccdfbe602"
+    },
+    "release": {
+      "path": "/Users/yuno/java/Android/YunoTV/app/build/outputs/apk/release/app-release.apk",
+      "bytes": 3815650,
+      "MiB": 3.64,
+      "sha256": "7bfb79b60cc35fedcceb64620935675bbc0bd6489f2e1a95c95c999e6fe103d9"
+    }
+  },
+  "deviceTests": {
+    "passed": 2,
+    "failed": 0,
+    "seconds": 60.847,
+    "device": "API 37 ARM64 phone emulator, 1920x1080 / 240 dpi"
+  },
+  "remoteMetadataTest": {
+    "passed": 1,
+    "snapshot": "2026-10-07 19:12 Asia/Shanghai"
+  },
+  "releaseUiSmoke": {
+    "install": "PASS",
+    "launch": "PASS",
+    "coldActivityMs": 701,
+    "remoteControlNavigation": "PASS",
+    "manualConfig": "PASS",
+    "detail": "PASS",
+    "originalMp4Playback": "PASS",
+    "historyPercent": 76,
+    "favoriteAfterProcessRestart": "PASS"
+  }
+}

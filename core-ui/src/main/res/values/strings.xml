@@ -1,0 +1,42 @@
+<resources>
+    <string name="error_file_picker">设备没有可用的文件选择器，请安装兼容的文件管理器，或使用远程配置 URL。</string>
+    <string name="home">首页</string><string name="search">搜索</string><string name="live">直播</string><string name="history">历史</string><string name="favorite">收藏</string><string name="settings">设置</string>
+    <string name="empty_source">还没有添加配置源</string><string name="empty_guide">添加你有权使用的 JSON、TXT 或 IPTV 配置，开启你的私人影院。</string><string name="add_source">添加配置</string>
+
+    <string name="error_network">网络连接失败，请检查网络后重试。</string><string name="error_timeout">数据源请求超时，请稍后重试。</string>
+    <string name="error_download">配置下载失败，继续使用上次缓存。</string><string name="error_config">配置格式错误，请检查文件内容。</string><string name="error_encoding">文件编码异常，请使用 UTF-8 编码。</string><string name="error_url">视频或配置地址无效，请使用 HTTP(S) URL。</string><string name="error_unsupported">当前版本暂不支持该数据源类型。</string><string name="error_empty">没有找到可用内容。</string><string name="error_playback">视频加载失败，请重试或切换线路。</string><string name="error_storage">无法读取或保存文件。</string><string name="error_unknown">操作未完成，请稍后重试。</string>
+    <string name="add_url">输入 URL</string><string name="import_files">导入多个文件</string><string name="refresh_all">刷新全部</string><string name="loading">正在加载…</string><string name="import_count">已导入 %1$d 个文件</string><string name="priority_value">优先级 %1$d</string><string name="last_update">最后更新 %1$s</string><string name="never_updated">尚未更新</string><string name="status_ok">正常</string><string name="status_new">待刷新</string><string name="disable">禁用</string><string name="enable">启用</string><string name="edit">编辑</string><string name="refresh">刷新</string><string name="delete">删除</string><string name="parse_warnings">解析提示 (%1$d)</string><string name="delete_source">删除配置源</string><string name="cancel">取消</string><string name="close">关闭</string><string name="source_management">配置源管理</string><string name="source_name">源名称</string><string name="source_url">配置 URL</string><string name="priority">优先级（数值越大越优先）</string><string name="save">保存</string><string name="retry">重试</string>
+
+<string name="continue_watching">继续观看</string><string name="recent_watched">最近观看</string><string name="recent_updated">最近更新</string><string name="resume_percent">继续播放 %1$d%%</string><string name="live_only_hint">已添加 IPTV 配置，请进入直播页面。</string>
+<string name="search_hint">搜索影视名称（支持系统输入法）</string><string name="backspace">删除</string><string name="clear_input">清空</string><string name="search_history">搜索历史</string><string name="clear_search_history">清空搜索历史</string><string name="searching">正在搜索各个启用源…</string><string name="search_failed_count">%1$d 个源未能响应，其他结果不受影响。</string><string name="search_results">搜索结果 (%1$d)</string><string name="no_search_results">没有找到匹配内容，请更换关键词。</string>
+
+<string name="director_value">导演：%1$s</string><string name="actors_value">演员：%1$s</string><string name="no_description">暂无简介</string><string name="play">播放</string><string name="play_from_start">从头播放</string><string name="add_favorite">收藏</string><string name="remove_favorite">取消收藏</string><string name="back">返回</string><string name="no_direct_play">此影片没有可用的 HTTP(S) 直链剧集。当前版本不执行解析器或插件脚本。</string><string name="play_lines">播放线路与剧集</string>
+
+<string name="buffering">正在缓冲…</string><string name="switch_line">切换线路</string><string name="pause">暂停</string><string name="seek_back">快退 %1$d 秒</string><string name="seek_forward">快进 %1$d 秒</string><string name="previous_episode">上一集</string><string name="next_episode">下一集</string><string name="episodes">剧集</string><string name="speed">倍速</string><string name="speed_value">倍速 %1$.2f×</string><string name="aspect">画面比例</string><string name="subtitles">字幕</string><string name="audio_tracks">音轨</string><string name="hide_controls">隐藏控制栏</string><string name="next_countdown">%1$d 秒后自动播放下一集</string><string name="play_now">立即播放</string><string name="aspect_original">原始</string><string name="aspect_16_9">16:9</string><string name="aspect_fill">填充</string><string name="aspect_fit">适应</string><string name="aspect_crop">裁剪</string><string name="subtitles_off">关闭字幕</string><string name="no_tracks">此媒体没有可切换的音轨或字幕。</string>
+
+<string name="clear_history">清空播放历史</string><string name="no_history">暂无播放历史</string><string name="history_hint">播放后会自动保存剧集和观看进度。</string><string name="completed_percent">已看完 %1$d%%</string><string name="clear_history_confirm">清空所有播放历史？</string><string name="no_favorites">暂无收藏</string><string name="favorite_hint">在影片详情中收藏喜欢的内容。</string><string name="player_settings">播放器设置</string><string name="seek_seconds">快进/快退 %1$d 秒</string><string name="default_aspect">默认画面 %1$s</string><string name="auto_next">自动下一集</string><string name="record_history">记录观看历史</string><string name="auto_refresh">自动刷新配置（启动及每 6 小时）</string><string name="clear_cache">清理配置、目录与图片缓存</string><string name="export_logs">导出诊断日志</string><string name="interface_settings">界面设置</string><string name="theme_dark">主题 · 深色影院</string><string name="theme_oled">主题 · 纯黑</string><string name="home_recent">首页默认 · 最近更新</string><string name="home_continue">首页默认 · 继续观看</string><string name="about_text">Yuno TV 0.2.0
+支持 Android 8.0 及以上。仅播放你有权访问的媒体。
+第一版支持 JSON CMS、HTTP(S) 直链、TXT/M3U IPTV。
+不执行 Spider/JAR/JS 或解析器，不绕过 DRM 和访问控制。
+遥控：方向键导航、确认选择、返回退出；全屏时左右快进/快退，上键控制栏，下键剧集。
+未获取或内置任何影视内容。</string><string name="clear_cache_confirm">清理远程缓存并重新下载配置？本地导入文件会保留。</string><string name="confirm">确认</string><string name="enabled">已启用</string><string name="disabled">已禁用</string>
+
+<string name="no_live">还没有 IPTV 频道</string><string name="live_hint">导入合法的 M3U/TXT 频道列表，或添加包含 lives 的 JSON 配置。</string><string name="all_channels">全部频道</string><string name="live_favorites">频道收藏</string><string name="no_channels">此分类暂无频道</string><string name="select_channel">选择频道开始预览</string><string name="epg_optional">此源提供了 EPG 地址，节目单将在后续版本支持。</string><string name="fullscreen">全屏播放</string>
+<string name="lan_permission">允许访问局域网媒体</string><string name="lan_permission_hint">Android 17 访问家庭局域网中的媒体源需要局域网权限。公网媒体不需要此权限。</string>
+<string name="choose_source">选择影片来源</string>
+<string name="app_brand">Yuno TV</string>
+    <string name="hero_detail">查看详情</string>
+    <string name="hero_label">精选推荐</string>
+    <string name="source_statistics">配置 %1$d · 站点 %2$d · 支持 %3$d · 未支持 %4$d</string>
+    <string name="source_diagnostics">数据源诊断</string>
+    <string name="diagnostic_counts">成功 %1$d · 失败 %2$d · 解析 %3$d · 去重后 %4$d</string>
+    <string name="diagnostic_latency">%1$d 毫秒 · 站点 %2$d · 支持 %3$d · 未支持 %4$d</string>
+    <string name="cached_data">正在使用本地缓存</string>
+    <string name="health_check">检查可用源（限 8 个）</string>
+    <string name="source_capability">%1$s · %2$s · %3$s</string>
+    <string name="loading_page">正在加载更多</string>
+    <string name="settings_data">数据与配置</string>
+    <string name="settings_storage">记录与缓存</string>
+    <string name="settings_about">关于 Yuno TV</string>
+    <string name="search_progress">已完成 %1$d / %2$d 个来源</string>
+</resources>

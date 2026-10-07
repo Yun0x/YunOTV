@@ -1,0 +1,74 @@
+Applications Memory Usage (in Kilobytes):
+Uptime: 1155757 Realtime: 1155757
+
+** MEMINFO in pid 8663 [com.yuno.tv] **
+                   Pss  Private  Private  SwapPss      Rss     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty    Total     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------   ------
+  Native Heap    46491    46460        0       11    49296    63724    55141     4331
+  Dalvik Heap    36418    36312       20       32    42152    20963    10482    10481
+ Dalvik Other    11728     5508        0        1    18348                           
+        Stack     2800     2800        0        0     2808                           
+    Other dev        8        0        8        0      312                           
+     .so mmap     2415      324      216        0    46800                           
+    .jar mmap     2626        0      200        0    49404                           
+    .apk mmap      205        0       32        0     1692                           
+    .ttf mmap      739        0      460        0     1328                           
+    .dex mmap    37202    37192        0        0    38076                           
+    .oat mmap       28        0        0        0     1988                           
+    .art mmap     8161     7928        4        8    23508                           
+   Other mmap     9363        4     6092        0    14292                           
+        Memfd       10        0        0        0      604                           
+      Unknown      856      596      248        0     2568                           
+        TOTAL   159102   137124     7280       52   293176    84687    65623    14812
+ 
+ App Summary
+                       Pss(KB)                        Rss(KB)
+                        ------                         ------
+           Java Heap:    44244                          65660
+         Native Heap:    46460                          49296
+                Code:    38572                         151872
+               Stack:     2800                           2808
+            Graphics:        0                              0
+       Private Other:    12328
+              System:    14698
+             Unknown:                                   23540
+ 
+           TOTAL PSS:   159102            TOTAL RSS:   293176       TOTAL SWAP PSS:       52
+ 
+ Objects
+               Views:        7         ViewRootImpl:        1
+         AppContexts:        5           Activities:        1
+              Assets:       21        AssetManagers:        0
+       Local Binders:       20        Proxy Binders:       55
+       Parcel memory:        9         Parcel count:       38
+    Death Recipients:        0             WebViews:        0
+ 
+ Native Allocations
+                         Count                       Total(kB)
+                        ------                         ------
+   Bitmap (malloced):       18                            257
+Bitmap (nonmalloced):       16                           6540
+    Other (malloced):      719                             67
+ Other (nonmalloced):       84                             62
+ 
+ Mapped Bitmaps
+                         Count                       Size(KB)
+                        ------                         ------
+              Mapped:        0                              0
+              Unique:        0                              0
+ 
+ SQL
+         MEMORY_USED:      256
+  PAGECACHE_OVERFLOW:       96          MALLOC_SIZE:       46
+ 
+ DATABASES
+      pgsz     dbsz   Lookaside(b) cache hits cache misses cache size  Dbname
+PER CONNECTION STATS
+         4       84             68   211   195     8  /data/user/0/com.yuno.tv/databases/yuno-tv.db
+         4        8                    0     0     0    (attached) temp
+         4       84            120   190    24     7  /data/user/0/com.yuno.tv/databases/yuno-tv.db (1)
+POOL STATS
+     cache hits  cache misses    cache size  Dbname
+            401           223            15  /data/user/0/com.yuno.tv/databases/yuno-tv.db
+ 

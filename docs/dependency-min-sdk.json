@@ -1,0 +1,95 @@
+[
+  {
+    "dependency": "androidx.activity:activity-compose:1.10.1",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/activity/activity-compose/1.10.1/activity-compose-1.10.1.aar"
+  },
+  {
+    "dependency": "androidx.lifecycle:lifecycle-runtime-compose-android:2.9.2",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-runtime-compose-android/2.9.2/lifecycle-runtime-compose-android-2.9.2.aar"
+  },
+  {
+    "dependency": "androidx.lifecycle:lifecycle-viewmodel-compose-android:2.9.2",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-viewmodel-compose-android/2.9.2/lifecycle-viewmodel-compose-android-2.9.2.aar"
+  },
+  {
+    "dependency": "androidx.compose.ui:ui-android:1.9.0",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/compose/ui/ui-android/1.9.0/ui-android-1.9.0.aar"
+  },
+  {
+    "dependency": "androidx.compose.foundation:foundation-android:1.9.0",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/compose/foundation/foundation-android/1.9.0/foundation-android-1.9.0.aar"
+  },
+  {
+    "dependency": "androidx.compose.material3:material3-android:1.3.2",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/compose/material3/material3-android/1.3.2/material3-android-1.3.2.aar"
+  },
+  {
+    "dependency": "androidx.tv:tv-material:1.0.1",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/tv/tv-material/1.0.1/tv-material-1.0.1.aar"
+  },
+  {
+    "dependency": "androidx.room:room-runtime-android:2.7.2",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/room/room-runtime-android/2.7.2/room-runtime-android-2.7.2.aar"
+  },
+  {
+    "dependency": "androidx.datastore:datastore-preferences-android:1.1.7",
+    "minSdk": 19,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/datastore/datastore-preferences-android/1.1.7/datastore-preferences-android-1.1.7.aar"
+  },
+  {
+    "dependency": "androidx.media3:media3-exoplayer:1.8.0",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/media3/media3-exoplayer/1.8.0/media3-exoplayer-1.8.0.aar"
+  },
+  {
+    "dependency": "androidx.media3:media3-exoplayer-hls:1.8.0",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/media3/media3-exoplayer-hls/1.8.0/media3-exoplayer-hls-1.8.0.aar"
+  },
+  {
+    "dependency": "androidx.media3:media3-ui:1.8.0",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/media3/media3-ui/1.8.0/media3-ui-1.8.0.aar"
+  },
+  {
+    "dependency": "androidx.media3:media3-datasource-okhttp:1.8.0",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/media3/media3-datasource-okhttp/1.8.0/media3-datasource-okhttp-1.8.0.aar"
+  },
+  {
+    "dependency": "io.coil-kt:coil-compose:2.7.0",
+    "minSdk": 21,
+    "artifact": "https://repo.maven.apache.org/maven2/io/coil-kt/coil-compose/2.7.0/coil-compose-2.7.0.aar"
+  },
+  {
+    "dependency": "androidx.core:core-ktx:1.16.0",
+    "minSdk": 21,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/core/core-ktx/1.16.0/core-ktx-1.16.0.aar"
+  },
+  {
+    "dependency": "androidx.test:runner:1.6.2",
+    "minSdk": 19,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/test/runner/1.6.2/runner-1.6.2.aar",
+    "scope": "androidTest"
+  },
+  {
+    "dependency": "androidx.test.ext:junit:1.2.1",
+    "minSdk": 19,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/test/ext/junit/1.2.1/junit-1.2.1.aar",
+    "scope": "androidTest"
+  },
+  {
+    "dependency": "androidx.test.uiautomator:uiautomator:2.3.0",
+    "minSdk": 19,
+    "artifact": "https://dl.google.com/dl/android/maven2/androidx/test/uiautomator/uiautomator/2.3.0/uiautomator-2.3.0.aar",
+    "scope": "androidTest"
+  }
+]
