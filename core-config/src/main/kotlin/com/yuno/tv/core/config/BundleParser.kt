@@ -32,13 +32,13 @@ object RelativeUrlResolver {
         val raw = value.trim()
         if (raw.isBlank()) return ""
         if (raw.toHttpUrlOrNull() != null) return raw.toHttpUrlOrNull()!!.toString()
-        if (raw.startsWith("./") || raw.startsWith("../") || raw.startsWith('/') || (!raw.contains(':') && raw.contains('/'))) {
+        if (raw.startsWith("./") || raw.startsWith("../") || raw.startsWith('/') || (!raw.contains(':') && (raw.contains('/') || raw.substringBefore(';').substringBefore('?').endsWith(".js") || raw.substringBefore(';').endsWith(".jar") || raw.endsWith(".json") || raw.endsWith(".m3u") || raw.endsWith(".txt")))) {
             return base.toHttpUrlOrNull()?.resolve(raw)?.toString() ?: raw
         }
         return raw
     }
 }
-enum class ConfigContentType { YUNO_BUNDLE, TVBOX, MULTI_REPO, GENERIC_JSON, M3U, TXT, UNKNOWN }
+enum class ConfigContentType { COMPILED_BUNDLE, YUNO_BUNDLE, TVBOX, MULTI_REPO, GENERIC_JSON, M3U, TXT, UNKNOWN }
 class ContentTypeDetector {
     fun detect(body: String, url: String = "", header: String = ""): ConfigContentType {
         val text = body.trim().removePrefix("\uFEFF")
@@ -46,6 +46,7 @@ class ContentTypeDetector {
         if (text.startsWith('{') || text.startsWith('[')) {
             val root = runCatching { jsonObject(text) }.getOrNull() ?: return ConfigContentType.UNKNOWN
             return when {
+                root.string("format") == "yunotv-compiled-bundle" -> ConfigContentType.COMPILED_BUNDLE
                 root.string("format") == "yunotv-source-bundle" -> ConfigContentType.YUNO_BUNDLE
                 root.has("sites") || root.has("lives") || root.has("parses") -> ConfigContentType.TVBOX
                 root.has("urls") || root.has("configs") -> ConfigContentType.MULTI_REPO

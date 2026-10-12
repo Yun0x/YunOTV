@@ -13,6 +13,7 @@ class ConfigMerger {
             sorted.first().copy(origins = sorted.flatMap { it.origins }.distinctBy { it.sourceId + "|" + it.originUrl })
         }.sortedWith(compareBy<UnifiedLive> { it.group }.thenBy { it.name })
         val parses = configs.flatMap { it.parses }.sortedByDescending { it.origin.priority }.distinctBy { it.id }
-        return UnifiedConfig(sites, lives, parses, configs.flatMap { it.warnings })
+        val playlists = configs.flatMap { it.playlists }.sortedByDescending { it.origin.priority }.distinctBy { it.id }
+        return UnifiedConfig(sites, lives, parses, configs.flatMap { it.warnings }, playlists = playlists)
     }
 }

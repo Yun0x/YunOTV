@@ -31,7 +31,8 @@ class SourceStore(private val database: YunoDatabase, private val directory: Fil
             return@withContext model
         }
         val file = File(directory, row.fileName)
-        if (row.fileName.isBlank() || !file.isFile || file.length() > 4 * 1024 * 1024) return@withContext null
+        val limit = if (row.url.startsWith("asset://yunotv/")) 16 * 1024 * 1024 else 4 * 1024 * 1024
+        if (row.fileName.isBlank() || !file.isFile || file.length() > limit) return@withContext null
         row.model(file.readText(Charsets.UTF_8))
     }
     suspend fun saveCache(cache: ConfigCache) = withContext(Dispatchers.IO) {

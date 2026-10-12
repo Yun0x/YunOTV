@@ -1,5 +1,6 @@
 import java.util.zip.ZipFile
 import java.util.Properties
+import java.security.MessageDigest
 
 plugins { id("com.android.application"); id("org.jetbrains.kotlin.plugin.compose") }
 android {
@@ -99,20 +100,18 @@ dependencies {
     implementation(project(":feature-live"))
 }
 
-// The root bundle is copied by the Variant API as a generated, read-only asset.
-abstract class PrepareBundleAssets : DefaultTask() {
-    @get:InputFile abstract val bundle: RegularFileProperty
-    @get:OutputDirectory abstract val outputDirectory: DirectoryProperty
-    @TaskAction fun prepare() {
-        val target = outputDirectory.get().asFile.resolve("sources.txt.json")
-        target.parentFile.mkdirs()
-        bundle.get().asFile.copyTo(target, overwrite = true)
+// Precompiled assets are checked in. Assembling never synchronizes remote sources.
+val verifyPackagedYunoSources = tasks.register("verifyPackagedYunoSources") {
+    group = "verification"
+    description = "Checks local bundle/index presence and agreement without any network request."
+    val bundle = layout.projectDirectory.file("src/main/assets/yunotv/yunotv-bundle.json")
+    val index = layout.projectDirectory.file("src/main/assets/yunotv/resource-index.json")
+    inputs.files(bundle, index)
+    doLast {
+        check(bundle.asFile.isFile && index.asFile.isFile) { "Local Yuno assets missing. Explicitly run ./gradlew syncYunoSources on the development machine." }
+        val hash = MessageDigest.getInstance("SHA-256").digest(bundle.asFile.readBytes()).joinToString("") { "%02x".format(it) }
+        val expected = Regex("\"bundleSha256\"\\s*:\\s*\"([a-f0-9]{64})\"").find(index.asFile.readText())?.groupValues?.get(1)
+        check(hash == expected) { "Packaged Yuno bundle/index mismatch; run syncYunoSources explicitly." }
     }
 }
-val bundleAssets = tasks.register<PrepareBundleAssets>("prepareBundleAssets") {
-    bundle.set(rootProject.layout.projectDirectory.file("sources.txt.json"))
-    outputDirectory.set(layout.buildDirectory.dir("generated/sourceBundle/assets"))
-}
-androidComponents.onVariants { variant ->
-    variant.sources.assets?.addGeneratedSourceDirectory(bundleAssets, PrepareBundleAssets::outputDirectory)
-}
+tasks.matching { it.name == "preBuild" }.configureEach { dependsOn(verifyPackagedYunoSources) }

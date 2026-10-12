@@ -20,3 +20,17 @@ tasks.withType<Test>().configureEach {
     systemProperty("yuno.remote.integration", System.getenv("YUNO_RUN_REMOTE_INTEGRATION") ?: "0")
     inputs.property("remoteIntegration", System.getenv("YUNO_RUN_REMOTE_INTEGRATION") ?: "0")
 }
+
+tasks.register<Test>("compileYunoSourceModels") {
+    group = "yuno sources"
+    dependsOn(":downloadYunoSources", "compileDebugUnitTestKotlin", "compileDebugUnitTestJavaWithJavac")
+    val base = tasks.named<Test>("testDebugUnitTest")
+    testClassesDirs = files(provider { base.get().testClassesDirs })
+    classpath = files(provider { base.get().classpath })
+    filter { includeTestsMatching("com.yuno.tv.tools.YunoSourceCompiler") }
+    systemProperty("yuno.compiler", "true")
+    systemProperty("yuno.workspace", rootProject.projectDir.absolutePath)
+    outputs.upToDateWhen { false }
+    testLogging { showStandardStreams = true }
+    maxHeapSize = "3g" // Build-machine compiler only; this is never an Android runtime setting.
+}

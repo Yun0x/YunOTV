@@ -38,7 +38,7 @@ fun LiveScreen(vm: LiveViewModel, onFullscreen: (PlaybackRequest) -> Unit, onAdd
         owner.lifecycle.addObserver(observer); vm.resume()
         onDispose { owner.lifecycle.removeObserver(observer); vm.pause() }
     }
-    if (config.lives.isEmpty()) {
+    if (config.lives.isEmpty() && config.playlists.isEmpty()) {
         EmptyState(stringResource(R.string.no_live), stringResource(R.string.live_hint), stringResource(R.string.add_source), onAddSource); return
     }
     val groups = remember(config.lives) { config.lives.groupBy { it.group }.map { (name, channels) ->
@@ -61,6 +61,9 @@ fun LiveScreen(vm: LiveViewModel, onFullscreen: (PlaybackRequest) -> Unit, onAdd
             item { TvAction(stringResource(R.string.all_channels)) { vm.group("ALL") } }
             item { TvAction(stringResource(R.string.live_favorites)) { vm.group("FAVORITES") } }
             item { TvAction(stringResource(R.string.recent_watched)) { vm.group("RECENT") } }
+            config.playlists.forEach { playlist -> item(key = "PLAYLIST:${playlist.id}") {
+                TvAction(playlist.name, selected = state.playlistId == playlist.id) { vm.playlist(playlist.id) }
+            } }
             groups.forEach { group -> item(key = group.id) { TvAction(group.name, selected = state.group == group.id) { vm.group(group.id) } } }
         }
         LazyColumn(Modifier.width(260.dp), state = channelScroll, verticalArrangement = Arrangement.spacedBy(12.dp), contentPadding = PaddingValues(8.dp)) {
@@ -70,6 +73,8 @@ fun LiveScreen(vm: LiveViewModel, onFullscreen: (PlaybackRequest) -> Unit, onAdd
             if (channels.isEmpty()) item { Text(stringResource(R.string.no_channels)) }
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(16.dp)) {
+            if (state.loading) Text(stringResource(R.string.loading))
+            if (state.selected == null) state.error?.let { Text(errorText(it)) }
             Box(Modifier.fillMaxWidth().aspectRatio(16f / 9f).background(CinemaColors.panel), contentAlignment = Alignment.Center) {
                 val player = vm.player
                 if (player != null) AndroidView(factory = { context -> PlayerView(context).apply { this.player = player; useController = false; isFocusable = false } },

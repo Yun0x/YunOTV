@@ -1,0 +1,22 @@
+{
+  "rootConfig": 4,
+  "downloadedConfig": 253,
+  "failedConfig": 314,
+  "parsedSites": 1897,
+  "deduplicatedSites": 1744,
+  "drpySites": 177,
+  "jsUrls": 220,
+  "jsDownloaded": 176,
+  "uniqueJs": 157,
+  "jsFailed": 44,
+  "spiderSites": 1419,
+  "jarUrls": 70,
+  "jarDownloaded": 30,
+  "uniqueJar": 30,
+  "jarFailed": 40,
+  "lastGoodResources": 0,
+  "playlistUrls": 555,
+  "playlistDownloaded": 231,
+  "playlistFailed": 324,
+  "assetsBytes": 58411040
+}

@@ -1,0 +1,505 @@
+{
+  "version": 1,
+  "jars": {
+    "https://github.allproxy.dpdns.org/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/main/custom_spider.jar": {
+      "type": "JAR",
+      "sha256": "cf4a252873ac102aad89cd4734440ca27f693268671963cbe1e22e24e2923907",
+      "asset": "yunotv/jar/cf4a252873ac102aad89cd4734440ca27f693268671963cbe1e22e24e2923907.jar",
+      "size": 493982,
+      "sourceSites": [
+        "0e60fa9fb00aa9873712eba8e44be888bb07697d9f0424860291359200e3e446",
+        "125299cf2f32233b13417b0ff16f263e05726a44bfce0c2b80e60755933c4d79",
+        "22b27ccdebc1ba582f2451415cf517650a05a75b6970daa286094783aaa4e79a",
+        "278d0a802d17b7e1cd88fc0bd9475ae5d540e804fce85d82ef3ed0e15d52d2df",
+        "2b3eb2c34899a40be1eac68de16f30b285eac12d4c50890b77a86e852b38b7b5",
+        "2ca48b1c4f7e40704994da9fa2817b17cda12c77c2603f4c68804852799530f1",
+        "313f9297e383253c44155f68124216a6a33c534670230dc0221af5862f4d0b87",
+        "345768aea77e8f9e5fcf19973326cae2f64e8545aca49b79ba3bf2366340d0c6",
+        "389056deab9ce7c01e219438dacaf1936a0773867e12d5d3371d7043c6ff9593",
+        "4835124fa226c34c79f119b9ab3bcb9be61be706d4224e9e503a9104bf5107c1",
+        "505c8fa34e90329ca2e90b896e9f3544c86f931f4ba44adddfc47d76daf74e45",
+        "566d57300a1b7a7eaff9555fcc3c4f9721b62c1287bdad1508212d8467865f17",
+        "5850e30fe998df375ea3b395c157b02a1dabaa518a8f139a1a3c5ac77f85c852",
+        "5a03cf99a812f6ee61ab1dceabcf9e0eb0674a30b4c31579528eee0661a8be4e",
+        "6a8f81219546d131721e1365395f25d757385f9a00df05792497a9d101258f7e",
+        "6ddd400972290293ceaf0977ef3240a019975be001564bf0b22bdd426498af15",
+        "726326c90b8332290ea8d7b79dbc18723fd8895231a6f32378f6d35dd49a9b73",
+        "7baf6d845c959a716c9802ea3b970914a2146ac01fd6e8738d8c857169acdb27",
+        "89b7c2dc1508a157ecfd995ed220242bb388bd64ca7c83bc03af939daaa14b97",
+        "8d2186cb8dd1df13540c6cf2657db09256d827170cbb9c425ff9807e5175ccd2",
+        "a2858b7aebad89227f9584ee011436d9b71e5c0741d59e08ac67351941b42329",
+        "b167a57ec2e0e60b3fc9fe917f08980a15f94b36f9e619c598802b5832c7a4dd",
+        "b389e1fb935f476d4d4eb752e289ed9e6ae338d92bfc66a3a8dd9229133396fe",
+        "b8f83529da56682e39795a72bb9b0c3968d0314c70bd7032b9503ec65ba60577",
+        "ca8245ec9bddb93776c0c9d55e023580e65b5e1436bff4d2dd7950d94bf74f33",
+        "d316d68d2254a6d078ec8223c75dd18e6a910e7d6081ecc96b28bd7fef5ce233",
+        "dc6bff1a30942b51d847668ba92f856299e5aed5a815790afd4021717429936e",
+        "e0298249446526096c6c67b59dc397cd5ada7292321a2c814b4507e4d22ac7ee",
+        "ee47a59319c5baafcd24075541a2a47441f9d13f0f5164813923946e1037fbce",
+        "fb0177bdf780a194214e8d571cafbaa8be37ff0c6111e08478638603f73f2179",
+        "fc3c5e76d1bd6b6504b182e3e8dbb3e27875dda0a22fd431edd6e9d5907b79cc"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://github.allproxy.dpdns.org/https://raw.githubusercontent.com/xyq254245/xyqonlinerule/main/custom_spider.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/1-698s/heads/main/yingshi/js/xbpq.jar": {
+      "type": "JAR",
+      "sha256": "d8982109de0bc20436012c4dc847401bdddc2595b5888c93ae2482cbb6eda6e1",
+      "asset": "yunotv/jar/d8982109de0bc20436012c4dc847401bdddc2595b5888c93ae2482cbb6eda6e1.jar",
+      "size": 518755,
+      "sourceSites": [
+        "0d3003c970a880c4d075bf00bb9fc1c28ef97e02c6d37bda5268dc7ec72a3333",
+        "15d0ff45b44ed7b476e9fcfb356f508bbafe7a81b46b76ff882ad4c93f91d845",
+        "2d9605ee536a9f98fcda32f6583a5f29520f48a4cd56d0cdb8484b7d452c5c24",
+        "33398cac57b910d85f47061b407b4dfb08f96cb9e1ea62961aa6cfc01efa1bf2",
+        "42931bdd9f87b168ef8000e90319b321c54d23547c13e26504d5bc797b486c96",
+        "4a9a424ba34b89e7c4610b647b5a75da743e77a143811b1939de8cbb487e1175",
+        "4aaeb0dd5023207b1f0cd0b056ffbfeededaa903c0eaaf638d53cd78e0ee0ca0",
+        "4fdae79c1b3e74018b5eee972e7a3e1b33f5b41ca6ec1e15111245f2068247ea",
+        "5215852fc2573a2c1ea38803f6e79f182e9ec0adbf17cc2333401c0b3c716e25",
+        "52fb04d1ba91e8d2a9f2e8391b6bccbe1cb32e2d95ec53d7bbbbd9bd1afe925e",
+        "5cc2199a4903257ccfbb3cb835ba584b6f5ae8646530a8f53760bf1a13d018e2",
+        "60be1ed9fdcce9caaec3b6bbef5744d295f586d3abdd5e60d50ed925dfab3372",
+        "60de117b3944461bb7d44a95ccd4e111f81c9a609f616867c465152caa2f8cb6",
+        "63605c82892fbaf7e09371c9fba35bbf40943a04f217ae6cbd16bfeb590259a4",
+        "6770b3d162e7e2ec3ac2fe25629ce37880b773256045a163efa4ed117f794995",
+        "6850ba89a3430ecd23743125742eb94273868e60a015150909cbe02a95408737",
+        "6a01b728f45694b9ee8fd3fc0f95136e0fc3a89e7350e29f5d44bd97e981d576",
+        "7105d9d6be42e4ccfe0e388d4fd299a2bc568cf8efff5afe302885a176f958b4",
+        "752ab527a7e6b8137e0eeec13a273cbcabc45f5d14c6d599aa11cb798e0fd770",
+        "7b203a0cd2d58a44865cafdcb048c271591c2d7ecc9a955cabb30655faf4131a",
+        "7eb7135bed2540f450c14a26cb4f1ecb28c16f9be21ad3187e337c94f2d62035",
+        "819a1d35d658ede915fe3e2ef917dfd69c57f06f195a6df313e52a2cf91ee8e1",
+        "83405e3255fcc31f0aa5172f56d4ccc08098f01b15cb1586516def301d135faf",
+        "89da00c2d6b7f04c566cf5ce4330c205fe283a1a8db5188306e1135c49013efc",
+        "9d82ce9685c254061295b678e500527a855c333760b4cadc7419a872680417c9",
+        "9d8ebc189341a24140a7d983cce7c1b81228b72d42cfb267f8681a2c6c2c14e0",
+        "a24bfe90d31f7588a8c9ed8d6e03efcbfaa45fd92a9d08e892bd643c3fff593f",
+        "a79d35a2d6b12baa0e959afb8120ed50db06c8064fe14578eca1d7692c92bc8e",
+        "b137d6add8167424bd260447a33d845c129e1553648e6cf59042188f6eb15730",
+        "bb36130dbb47ae5b8dd44ee03600e64981edbb1a32f05c2f5f384338a8cdcce3",
+        "c06c886ce81ea8ef486166840311af25e6805014b9dcb3335d649638db5e6a22",
+        "c9c23da622b9d6f8c3fd074ad482c7890d4c18ebf1eed7bff04083b821a527af",
+        "cc544a13002c9dcbb3af9bfbdb38bfa44ad4cd23116961921cc844b449991430",
+        "cd2c0cfb3e4bc86cce76d479f302c845f32565411bbfa662d1d172c949d1be6d",
+        "d20cf4d0c6d02ac1fbf6d0796663510cfd8d656494bda50d764c47e0f17e3174",
+        "d72b3cb36f1e84a95476c48827af7e137cfabbb86b4ed24eb057fb9bd83155de",
+        "e198c8287aafefaa2a6296adb6936c3d5a2277012b9d59e74fb315005dc892a5",
+        "ed31dd16dcc9ef720e75ed484ea6b49b05628a8a44d30470110dd459576d42b7",
+        "ed7a27d3725fd03b5ca9ec0c4055b0f044bffb7a8a3a93f787a7b6cd20fe943b",
+        "f6d6cd7930b32e1e35560fb758a2b705ee79fc3ee37fb1ed75f740470025cf37",
+        "fd5c79ba690ae926b5fc484cc3532c78578c287f3b1ea8d795a9528b5ac774ba"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/1-698s/heads/main/yingshi/js/xbpq.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/108-66s/HeChengChaXiu.jar": {
+      "type": "JAR",
+      "sha256": "6b727c38e839f6f31a1229c1f94d1fbd20178e61c898093f1439e5cf74d62e9f",
+      "asset": "yunotv/jar/6b727c38e839f6f31a1229c1f94d1fbd20178e61c898093f1439e5cf74d62e9f.jar",
+      "size": 696542,
+      "sourceSites": [
+        "3156e8df9d43e3d8e3ef66d6d94d966caafd4316d9a89877351ddaac6c9b81f2",
+        "7bac9393ab6e875edca1767a029973ca0a8aef3e159a18a92fd0e589cd4b66b8",
+        "8e0b0a00009350467143e72c37249de66a8d4d15ef1f4baea9510ffabbe5eba0",
+        "8ef3d0459e61e37c57c86608668fc309aa1f0d2a260d8a637f7ed7200606817a",
+        "986cf65b51f560152b3f341b0ffdaf98ec415747d441fb00d0b5226ca0d55be1",
+        "aee174b6640468a9dd46eedef981845ffdeebaee0c5ac3d00774f97bbace6d27",
+        "bc854a96540aefbdf24aa8c839938706714fcd50c5c0983e48f6355a5d726445",
+        "bdbc2f1216d29ef8d41524830aa149aff47789f8975fd3169ed1daa40881af15",
+        "db9e8d9661e3a26ddb7fae76f6843f739d96d74e780e920d1328a95d46d1533b",
+        "ea399dff56d96c79177b23aa438fe108464479db40bb86ad80d8f1003e7b579f",
+        "f049dc38e183f17ccc5c225883d91426305942a8ce23b0dc869c1c34ebc82f3e"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/108-66s/HeChengChaXiu.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/153-41s/HTB/PG/jar/xbpq.jar": {
+      "type": "JAR",
+      "sha256": "9a742d08c655879c6173d68e29c73d2979e685100a95115497209cc61e81cbad",
+      "asset": "yunotv/jar/9a742d08c655879c6173d68e29c73d2979e685100a95115497209cc61e81cbad.jar",
+      "size": 435070,
+      "sourceSites": [
+        "a87820f13c2c546234f2159607350736111cbe1f8f1fdb5b93a5b4f266269b44"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/153-41s/HTB/PG/jar/xbpq.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/2-504s/github.com/FongMi/CatVodSpider/raw/main/jar/custom_spider.jar": {
+      "type": "JAR",
+      "sha256": "1ef0625325caec4e767de7c914412149209b0b92e6bc52c920f0190a220baf36",
+      "asset": "yunotv/jar/1ef0625325caec4e767de7c914412149209b0b92e6bc52c920f0190a220baf36.jar",
+      "size": 137562,
+      "sourceSites": [
+        "776cd5c841642dd52513f2201f2e0e043c570f0bfbeeb81be3cdc92dde8052b1"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/2-504s/github.com/FongMi/CatVodSpider/raw/main/jar/custom_spider.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/33-170s/baohe2025/bh/raw/master/spider.jar": {
+      "type": "JAR",
+      "sha256": "a41f11e12267d0840eb8c949a59e5709d6a6f8fc42c86d845a7dad4be51a4fa1",
+      "asset": "yunotv/jar/a41f11e12267d0840eb8c949a59e5709d6a6f8fc42c86d845a7dad4be51a4fa1.jar",
+      "size": 1909530,
+      "sourceSites": [
+        "be1d18726ee9a7564a9d43a8d3367be346b7f309dd8b128a30d33d3378720f77"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/33-170s/baohe2025/bh/raw/master/spider.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/38-160s/vip/jar/lubin.php": {
+      "type": "JAR",
+      "sha256": "bbf12b041cafe5203221ab7ed985fe859ea726cd67bb1b09e8bfbfec62edec68",
+      "asset": "yunotv/jar/bbf12b041cafe5203221ab7ed985fe859ea726cd67bb1b09e8bfbfec62edec68.jar",
+      "size": 2081666,
+      "sourceSites": [
+        "636f8c49e0d55fe7bed5daee80755784c682ac80fe1846ae5856ac5491feacba",
+        "93f5e5c6fd4bb66d5d217e5bac9e64c75000a2eafd0169b0f2b3e5100453923b"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/38-160s/vip/jar/lubin.php"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/38-160s/xhz/Yoursmile.jar": {
+      "type": "JAR",
+      "sha256": "cc3b06eb7b265eb7efbceac31da8d46381099e65e0e5f4becfe62d06c42f36e5",
+      "asset": "yunotv/jar/cc3b06eb7b265eb7efbceac31da8d46381099e65e0e5f4becfe62d06c42f36e5.jar",
+      "size": 909588,
+      "sourceSites": [
+        "39b896d3d2d9028a69b139fcd447605d749ecc115112a0450dfbc1dd6ddbd7df",
+        "4a792964847948aa71e740841d6525decacb4d8953f22f8c740735ec295fe9f9",
+        "6481982ce3f4d00b0cd94aae79744a104b43ec18a631a6a722bcb2b30add47e0"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/38-160s/xhz/Yoursmile.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/38-160s/xiaosa/spider.jar": {
+      "type": "JAR",
+      "sha256": "391065e92e19437e73109e9d3c79feff6676baa8ed4fec3cdb04f4e7cca77314",
+      "asset": "yunotv/jar/391065e92e19437e73109e9d3c79feff6676baa8ed4fec3cdb04f4e7cca77314.jar",
+      "size": 1859860,
+      "sourceSites": [
+        "ea6e9f1f79a1c27ab9eb0b4e26085f52a09a0894a455a9091ffa95128e50f246"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/38-160s/xiaosa/spider.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/4-427s/box/tm/sites/%E7%A0%81%E4%B8%8A%F0%9F%91%93%E5%A4%9A/duo.jar": {
+      "type": "JAR",
+      "sha256": "8dbf67664700696e9b63745f06b4c6984bad82e9fe1cd3d8d9515e44a505e495",
+      "asset": "yunotv/jar/8dbf67664700696e9b63745f06b4c6984bad82e9fe1cd3d8d9515e44a505e495.jar",
+      "size": 647438,
+      "sourceSites": [
+        "0478cb628394eac59650b7dad76588992ea07b9620558b80144a9a3fa595f86c"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/4-427s/box/tm/sites/%E7%A0%81%E4%B8%8A%F0%9F%91%93%E5%A4%9A/duo.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/4-427s/box/tm/sites/%E7%A0%81%E4%B8%8A%F0%9F%91%93%E5%A4%9A/main.jar": {
+      "type": "JAR",
+      "sha256": "61d9cf273738fd8ff08a0591a2df8f74f87bdcac55e647d2d170435fe0c52276",
+      "asset": "yunotv/jar/61d9cf273738fd8ff08a0591a2df8f74f87bdcac55e647d2d170435fe0c52276.jar",
+      "size": 532750,
+      "sourceSites": [
+        "5ed19f8efd48bbdfd4d3edd85fa55d00d2d90acffe014c193b42e3b5217b88d4",
+        "fbc302949bdb3ee76c8dbf6edb594602fabda0401f59eb88fb4db10cecd4b720"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/4-427s/box/tm/sites/%E7%A0%81%E4%B8%8A%F0%9F%91%93%E5%A4%9A/main.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/4-427s/box/tm/sites/%E7%A0%81%E4%B8%8A%F0%9F%91%93%E7%8E%89/H.jar": {
+      "type": "JAR",
+      "sha256": "c0bf57d557987fd56b52fba4c9b051976a8a4e7945611e6ba33ee5c9e2fb3839",
+      "asset": "yunotv/jar/c0bf57d557987fd56b52fba4c9b051976a8a4e7945611e6ba33ee5c9e2fb3839.jar",
+      "size": 672565,
+      "sourceSites": [
+        "004997ab0725e1fb55c1e62a3007369b508766d558aca5a0ce5a229ceb24d6bf",
+        "415c88dadca7c5fce93f69e72fc32bf502d2a9071529ff951ca43da3c352834b",
+        "a3b1bbe53c46990ba05d8ca2f7844f88406c86441240903fbb12ecc728be61b1"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/4-427s/box/tm/sites/%E7%A0%81%E4%B8%8A%F0%9F%91%93%E7%8E%89/H.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/43-152s/jar/XBPQ.jar": {
+      "type": "JAR",
+      "sha256": "64637af0a0dc780cbe58d72904c16b9ff95d16917fed715c2aa6390512d6c49d",
+      "asset": "yunotv/jar/64637af0a0dc780cbe58d72904c16b9ff95d16917fed715c2aa6390512d6c49d.jar",
+      "size": 397355,
+      "sourceSites": [
+        "5727ec0d6ef690aa79d756bf8f72e9182be34b5367c4fb0224e1a7be9ec40709",
+        "6044fc275f4ddd99eaf6d3cd0b385cec54e7a47d5196a970273201d6f8c6b6e9",
+        "8439ba4c5ca6f159334732768fa418dc3203f0f29c3c0e424e5280f810f5c379",
+        "861fdc00036f4fa5945835b7db026eecb35cefb52d5d64508842a28667761122",
+        "c5601927ddc66d1d197c2892f9e1ff11de6c496004f31f525558273c34cacf20",
+        "ff573659e682c1bb4a30c5501fe5ef230f78f6d74d49214dc39cd796b918022b"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/43-152s/jar/XBPQ.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/43-152s/pg.jar": {
+      "type": "JAR",
+      "sha256": "008a6c48fcb106f8b6f6d3dcc3b910c8eb903da147cf7e6f9e7f10ff2442d67f",
+      "asset": "yunotv/jar/008a6c48fcb106f8b6f6d3dcc3b910c8eb903da147cf7e6f9e7f10ff2442d67f.jar",
+      "size": 3811113,
+      "sourceSites": [
+        "191a9755269d3be14ebf468d1bc42afaa292d8475a3ed5d65f78611b141fad8d",
+        "5ab1e3219752b1bf45a3767ba951c64257d9e34de69f438303bf53159bc40835",
+        "caadee0274ac35113ddacdf9cc62b746557121be4f33c4e6029ac875e46275ef",
+        "d29c6f14d67acc68c6abd7165d7a56472e7da4481118396f8e71fe8aa562af76"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/43-152s/pg.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/66-108s/pg.jar": {
+      "type": "JAR",
+      "sha256": "0295394b29d5939c4bc8769725d4f04c88519cc7591cab0b4b7853a4ec8da466",
+      "asset": "yunotv/jar/0295394b29d5939c4bc8769725d4f04c88519cc7591cab0b4b7853a4ec8da466.jar",
+      "size": 4589793,
+      "sourceSites": [
+        "dcefd7b15f6340a761b92932b3dc991d84934063ef252c5e770f058a3dbb4002"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/auto/66-108s/pg.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/bocai/x4pro/5/lib/p.jar": {
+      "type": "JAR",
+      "sha256": "dfda804bf1fccdd5af4ae0b5324ad5d153e7f13e8f88a5889e0c9887f2f4d201",
+      "asset": "yunotv/jar/dfda804bf1fccdd5af4ae0b5324ad5d153e7f13e8f88a5889e0c9887f2f4d201.jar",
+      "size": 2097428,
+      "sourceSites": [
+        "48f26f02072e5e8b05b0e00c5d629952ad8b174740ba734e699e6acdd8be2ff6",
+        "b8d68f11b49f457966a3b65785bb5ad847959384bc72aac52d3e6936da7cb57a",
+        "eeddb191d3e814b89398ced0febde6507768c861bc6297aefc101e1b9688b012"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/bocai/x4pro/5/lib/p.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/cluntop/box/jar/xs.jar": {
+      "type": "JAR",
+      "sha256": "c81eedda82a8abbb24de3b2174e528986b31c97a3e68e459adb6d8f59d50ef51",
+      "asset": "yunotv/jar/c81eedda82a8abbb24de3b2174e528986b31c97a3e68e459adb6d8f59d50ef51.jar",
+      "size": 2019727,
+      "sourceSites": [
+        "209ea73a30e71d4d08339de41fe2d769ad7984285f740ee4254995f92938ff3d",
+        "2f0cda008d1aa80b1c4bcd88c8624a3f228a942aa5dd335cc47ce9cfcfa9e344"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/cluntop/box/jar/xs.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/cluntop/jsm/pg.jar": {
+      "type": "JAR",
+      "sha256": "a3b5042f1ba755a2a81675af89c171b8ee2d975535c53326c60b7f0024b7135b",
+      "asset": "yunotv/jar/a3b5042f1ba755a2a81675af89c171b8ee2d975535c53326c60b7f0024b7135b.jar",
+      "size": 4590587,
+      "sourceSites": [
+        "ac5a280d12658d103fbc9dbfc7dfaecc4c7fa79c976b2fa738393d244ded42c1",
+        "e19902e0e357f1f7d0d9234cd5e474c09e5c4429ef1358a57eeaa3c4c1c02add"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/cluntop/jsm/pg.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/deepseek/8815wmz/tvbox/9527.jar": {
+      "type": "JAR",
+      "sha256": "9384879bd4e19bd6ca90a0970c1087b9b8fdc3aec383672e800701ae3ba469a6",
+      "asset": "yunotv/jar/9384879bd4e19bd6ca90a0970c1087b9b8fdc3aec383672e800701ae3ba469a6.jar",
+      "size": 2038409,
+      "sourceSites": [
+        "1efd486e38c34ec345a129662df847a9c9645581b999abb6914f6c9fe3926e06",
+        "2b96e48ff3a44ef8bdfad4457be5bef06f809318917967f978331dfb8e568ab6",
+        "2d1d768eabcacb516dbfde93c7e27c7019cfd3d31fb4f8712c122a3506653ae5",
+        "3f572effe28567d485e97c2a7462aecbc8c11352304519621275f5a96f9caf9a",
+        "41dd4d22cb58df8ed7a255d7a968101dc48483eddda55338af66aa9fcf04808d",
+        "456dc72e651e7c373c022f4e2c6dd2e833517cac9e13ed03da6c76967d26eea3",
+        "6b7a2c0fe313b36c705095509c79e11e408b80212901253450df841aa4a88f82",
+        "9bebcdd3f154597f71f90f33dc055b60ae7dcae2e0aa271ca93ef1bccaabd28f",
+        "af45de8a299b664db79cae109511c398bac20216269e4dbf91582e178d97b56e",
+        "ce5e0b7a1e35c2643e6e745e8d00505392b742dfd422e4cf7c9e5ac33b93714f",
+        "d5b0a7743b0b88808e2663126f643c4cb7d681d31ef0eb28ee2d0d132fae1db8",
+        "df992070d529d22971a917ff470735e86a354d6ec8c3356423665f4ce8de60a3"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/deepseek/8815wmz/tvbox/9527.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/feishu-sync/api/bendi/yydsapi/nf/lib/f7a737368ecfe7c8413a773614e60807.png": {
+      "type": "JAR",
+      "sha256": "c09e94864295321c940c42289b398178f8fdc7eb41cf03a5c28a2c50b54ca896",
+      "asset": "yunotv/jar/c09e94864295321c940c42289b398178f8fdc7eb41cf03a5c28a2c50b54ca896.jar",
+      "size": 22502,
+      "sourceSites": [
+        "12a622d4b307d1cb94177190cb3ee2211d7add1f995b8ffe9e20bfff9105619e",
+        "2c04c00a01c87ddf1d7856c8bfdc792737fb7e03251e6528a9ee010bb33226e5",
+        "41d483276398e70133e91f459e5e17907f266a29c781e396dd3cf70f891c3da2",
+        "8d43691a9f86f1993f496ac6370e7a6f00805c4325b42c4f6fe19d9d88ffc603",
+        "ac42a8efe3da2f2d590aa1b699f5c5c59b935ab97a954ffaa9ef91fb7b5e193c",
+        "ccb9da0d60db9357ccd2062b4eee2755c16d87353818b04f32e40b3d9eb155a6",
+        "eb1ce21a8c1bb7300d81c2beb4dc8af72f8a777410a017e97633876e51949bb0",
+        "f397a6e5727bc7d92134a1b8633ee56a1fb54f030b9d210f545295afa1ddf422"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/feishu-sync/api/bendi/yydsapi/nf/lib/f7a737368ecfe7c8413a773614e60807.png"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/feishu-sync/c120487/00/raw/main/jar/pc0330.jar": {
+      "type": "JAR",
+      "sha256": "0180b8e24333d78a249dce6a9b5d7b3cb0d368bb31433ec194eae84c7c6be862",
+      "asset": "yunotv/jar/0180b8e24333d78a249dce6a9b5d7b3cb0d368bb31433ec194eae84c7c6be862.jar",
+      "size": 872469,
+      "sourceSites": [
+        "7bb11a37d9f308b2ab6d5b92934ae24e82499c546895fa85fc2cbc3285183d61"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/feishu-sync/c120487/00/raw/main/jar/pc0330.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/feishu-sync/lwlxh/tvhome/raw/master/o.jar": {
+      "type": "JAR",
+      "sha256": "035432dbb11f6ca4068eb3aa8765cf02fa0f76934450134a4891dfdf387dab71",
+      "asset": "yunotv/jar/035432dbb11f6ca4068eb3aa8765cf02fa0f76934450134a4891dfdf387dab71.jar",
+      "size": 1024276,
+      "sourceSites": [
+        "c80f77819dc47a9d09b715c2e0a4936a05e2f177a27a4de69eadf6daadf31a6c"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/feishu-sync/lwlxh/tvhome/raw/master/o.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/shiguang/svip/heads/main/jar/jd.jar": {
+      "type": "JAR",
+      "sha256": "dd518426c248528fca7c1e73ce97cee2a3dd46896c944a2742f4c38996445624",
+      "asset": "yunotv/jar/dd518426c248528fca7c1e73ce97cee2a3dd46896c944a2742f4c38996445624.jar",
+      "size": 378382,
+      "sourceSites": [
+        "8b441915391dac2b503cc17ba92eebdd8d900d7d3b8b2baf8e997dcb971077ed"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/shiguang/svip/heads/main/jar/jd.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/shiguang/svip/heads/main/svip.jar": {
+      "type": "JAR",
+      "sha256": "4b7f62d48b5c295112c1dbacb8a3a2d152893e219a03d93c26806d40d5afa3cf",
+      "asset": "yunotv/jar/4b7f62d48b5c295112c1dbacb8a3a2d152893e219a03d93c26806d40d5afa3cf.jar",
+      "size": 1937792,
+      "sourceSites": [
+        "04f37e6532c99680d9592bbbe1bc14d5aa605e7bbcd4d58ad6b57de519a2c441",
+        "0d078977ce336dee91d72ab261359128b22c32cdab4da576266ff5bd2fcba5b4",
+        "0dd8e45279f815bd3bd2a0952b8b3a0ec79a7dcaff0920531c5739f3928a572c",
+        "11c61ad6aff95ada5db39af4db0c7f88ea800dd67d7555599283e6bb6a3d566a",
+        "1569c0210036e113197ba789c5a99963320f222d7f933e6ebb5167f9cd6d9f5b",
+        "260967991132ce341cf3c4a321f5a2ed8fdf25328971f1dc02ca9f677ae8c627",
+        "2f18ff73582699e8c5c4e45c9031e47e98ff0a9ae21195d513722c70056c3d75",
+        "347d167900f9592d13c0b034e6faba142c1cffdef473c1ea39be96c5e951a550",
+        "3738f90193cd052805c068362c99aae754c06858b0770a21208e2002e082a83d",
+        "3b544db236bc5bf995d33ee7b01e2571761dfbe9a4cababa1907e8cfeb2d46b3",
+        "3c94c267a0943f3b6fff658c1c887d656328dd38a079f43446047003abfe80ad",
+        "4d306c25f860ea974b47e5c0b1a4822e85bfe03d633aa671905300c56e828e8a",
+        "51a71d7275abcdd824f55187a6b3f90f3c807d0c2bc279ef97ff2b41ce0194ed",
+        "60c5f71b2a545dc46f52f900bb4695cb232043530ce7e900c13c6a5b7bdc1dd3",
+        "62bd5d561014f86a0c940df782f34f06d4771f85cda053fc778c16bdd79fa5bf",
+        "690131d8c383e1866dbe835e1eb44421065376ef1991b5808965ab6f37007560",
+        "6c054b020a52f27a6830242400ed11d14f9a5b2a3b315688c61ac2a37274d5e6",
+        "6cddf3dc8729d21893cc35511742de2158c679a201c456ce77cd2f2ae920007b",
+        "6ea9cb366e560fe748dde151161a82c8eddddb09f66cf3702a835946cc5e7e6a",
+        "81f00097b91d665dcc7a973fb898628cceac6d2db3ceebf0040a6758e8e0636b",
+        "89bb13ef34aa346a989e4ef8efd17f3764e330fbb1bb95783a1c08f67dcc83ef",
+        "8ab615910182ed4e6f3070eab45d2c483c5bf66462ed80e7674b93f24b156084",
+        "9307ca3bff37986bf84d1a846517aa24ffbffbee5882157a4c64a5087344d4ae",
+        "94fb527c9ee89a11d886ffcf432deb411dbd687ef93b16a38e286a39dcdbcbfe",
+        "a82fec8bbab62e18e794619fc8fe34d6735a077336898f61b528f8055a3f2b46",
+        "b2ec26f53a0ed9b46070661e85c9eb35257b103585ac5be06577fd0e3bc51401",
+        "b76bd425bb2dbbea09e874c48c8321a0f182415aca095c2b4c31de9bfee3b4da",
+        "b9f40f4a7aeb6bf57245265f4ee609f61cf0e91c551f897d74b65f56394d225e",
+        "c85c2a3acbcf2e378fd1fa650f18bdae4ccf1b71c6029bce94fc5641bd52662b",
+        "c92c43eb375bc481efe9567c8ec801c42d612e2afd3fb83f44272f5069e40504",
+        "cd39108fbf7e5bebc61bfba1d621b549f9f2ba8683b79453e3255d63eb591ea4",
+        "d173ab5ebbbac3df3eec771a453ef43768934675ea474b3c291bf2a4cb97679b",
+        "d59d3a9644ad7bdf9f4306365b8547b9395306b9d3e8903b3e6b1b096a98853e",
+        "da4e72c2676ff9790719bb1eb93bfae42670d1d99b7b12beab4694c337ae1f59",
+        "f21161067dbb82e4d9b4eedf91d8b2381594f26fe702f8299b0cc59c2716f4e7",
+        "fad1790aa89245542205b6aac92b23fe229f320d8cdf11bc7b1081d9aa057d96"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/shiguang/svip/heads/main/svip.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/sv/lege-dj/heads/main/TV/jar/xyqxbpq.jar": {
+      "type": "JAR",
+      "sha256": "7b732f2289236619b791d9c5a0d862d42c9bf3e5bb6123a6982736329bbe9e16",
+      "asset": "yunotv/jar/7b732f2289236619b791d9c5a0d862d42c9bf3e5bb6123a6982736329bbe9e16.jar",
+      "size": 635660,
+      "sourceSites": [
+        "aa2ad711d95599f971b89ad505fb730e582a1d2b53d20db48e0fe32b6067bca6"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/sv/lege-dj/heads/main/TV/jar/xyqxbpq.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/sv/xiaogege/spider.jar": {
+      "type": "JAR",
+      "sha256": "6f4bd055a65e7efcd0af6c70e487eb65cd31b13bf8c777c57ffa1c09b7c92205",
+      "asset": "yunotv/jar/6f4bd055a65e7efcd0af6c70e487eb65cd31b13bf8c777c57ffa1c09b7c92205.jar",
+      "size": 1565634,
+      "sourceSites": [
+        "2cee3a5770f5a30a1f73d03311782c1b95c75ac1727b4eedf601b65b97029758",
+        "2e35ef6441b5d1912be88285788b69732765f3d7769580440d3797c95749db32",
+        "376ff8936b6585657057d1abd121f529a41138cf2f24af1ddcab9e4fad89aeb5",
+        "4998599c23d2ddb042cb5b4ec0f0ae8ce9f4be393c36f2c82f5ebdc96298dd09",
+        "c51057411c9be5c83b5228510de0827df909f76124c932685e6ea729f3006e10",
+        "cac986d86d63c932208f67ec0d34a07821b95b3744428a36f4aa84bcf345d0c0",
+        "cbbc67c2ab11fa4e3946fd1ff9abba0f9662caf9cce9e8014b5a0d887985b270"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/sv/xiaogege/spider.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/top98/jar/top98_1.jar": {
+      "type": "JAR",
+      "sha256": "efe994fe9a1745aa2c835aa8178b99340fa2a9a49d04bbe79b0e30125ec2d489",
+      "asset": "yunotv/jar/efe994fe9a1745aa2c835aa8178b99340fa2a9a49d04bbe79b0e30125ec2d489.jar",
+      "size": 326140,
+      "sourceSites": [
+        "117b2d05a4c8d7dda95d48c69584141fda680e460d1fd1d3a147c42a3b36c86d",
+        "1db1efda4f885a57970da8a2601bf5930fa514e244872668d707676375646ad9",
+        "3c9c4cf0b5e543c587100e975e2381b9266e7489a72570a5df5464adcdf3e6c5",
+        "49e24eea37e4b48d83c5f7a311d976c60dbce42301a51710cf8eb25686ce46cb",
+        "5081c61a2e67d77a0fe1a80fb15bf8ec6264355ea739e8edce70a3730c6bfaef",
+        "53d6ed610513dd866fdbed2a15e39ea70a9cd771d64d6c7ffd68067a75b5b831",
+        "778c3a9a905571781d9d00fd679522fedd3008fb736098a54f2b0e20879c208e",
+        "b0896ae6edda32b3df46014830720e651105e066164412de352a6954325668d4",
+        "dab0bc6dd6c411f5394a24a816efc49bb030e31a5a8d65bc10c96723b5b5b3e3"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/top98/jar/top98_1.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/victor/tvbox/qist/tvbox/blob/master/xiaosa/spider.jar": {
+      "type": "JAR",
+      "sha256": "35f22f6c92d0c8a841a16d324cb1e4cac0b81662ebc7f4c9313e9bf9663fabca",
+      "asset": "yunotv/jar/35f22f6c92d0c8a841a16d324cb1e4cac0b81662ebc7f4c9313e9bf9663fabca.jar",
+      "size": 1859860,
+      "sourceSites": [
+        "c20927607c4895d51bf6098f010b42701abbbeafcf8be9517989e6a9875d6294"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/victor/tvbox/qist/tvbox/blob/master/xiaosa/spider.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/xingwei/kstore/twvip/jarR/raw/master/kjtw.jar": {
+      "type": "JAR",
+      "sha256": "d9e0f8541947454f007b1c659ee6f66e330b9eb2b9995294c66709902febf8f9",
+      "asset": "yunotv/jar/d9e0f8541947454f007b1c659ee6f66e330b9eb2b9995294c66709902febf8f9.jar",
+      "size": 1843578,
+      "sourceSites": [
+        "8130f103bddae2bbc9161a66bd40317cff97bb135ab101ca7e22fb7ebd27d1c8"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/xingwei/kstore/twvip/jarR/raw/master/kjtw.jar"
+    },
+    "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/xingwei/kstore/twvip/jarR/raw/master/ox.jar": {
+      "type": "JAR",
+      "sha256": "59ca73d4d12758285ad7ce00ba07c4fbf1bf4f3c7e8fca642181f82bc6b68dc5",
+      "asset": "yunotv/jar/59ca73d4d12758285ad7ce00ba07c4fbf1bf4f3c7e8fca642181f82bc6b68dc5.jar",
+      "size": 1519034,
+      "sourceSites": [
+        "0a4f20b26b0e429e9735b8dd53444de9fdf57f4adc885f10fd797193b2faedf0",
+        "0d8af32d9da594fb4b8dc013e9ab0011d3c3ec94d819e41176e52d2359f1216b",
+        "4068063918e953b54d977c6a3e267a09aadc46ee252d265214f9dad858f31e04",
+        "53b4cd941b51b63f154d696842ddd1b2412fb7448250cf069e48bd07d7e6fd03",
+        "b871c306126b79a49fe3976e8f88c2e20410b59e328245ca2c948d052827bc2e",
+        "e3a55321cd6b666e3c9e081197d810a671ec4ba2219d48d86f56e344bbf019dd"
+      ],
+      "status": "DOWNLOADED",
+      "originalUrl": "https://raw.githubusercontent.com/hebijunge/tvbox-config/main/deps/xingwei/kstore/twvip/jarR/raw/master/ox.jar"
+    }
+  }
+}

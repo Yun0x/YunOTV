@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-08",
+  "version": "0.3.0",
+  "minSdk": 26,
+  "targetSdk": 37,
+  "apkPath": "/Users/yuno/java/Android/YunoTV/app/build/outputs/apk/release/app-release.apk",
+  "apkBytes": 57213966,
+  "apkSha256": "dfdd5ed1baaccd2bec6725fcf8d04d5b1116a99e51413074f4f7595d8f6c12c5",
+  "build": {
+    "test": "PASS",
+    "lint": "PASS",
+    "assembleDebug": "PASS",
+    "assembleRelease": "PASS",
+    "offlineAssembly": "PASS"
+  },
+  "devices": {
+    "Android TV API 36 ARM64": {
+      "GitHub Blocked Boot": "PASS",
+      "Local Bundle": "PASS",
+      "Local JS": "PASS",
+      "Local Jar": "PASS",
+      "Local Playlist": "PASS",
+      "D-Pad Source Management": "PASS"
+    },
+    "Android API 26 ARM64": {
+      "GitHub Blocked Boot": "PASS",
+      "Local Bundle": "PASS",
+      "Local JS": "PASS",
+      "Local Jar": "PASS",
+      "Local Playlist": "PASS",
+      "D-Pad Source Management": "PASS"
+    }
+  },
+  "blockedArtifactDownloadProviderTest": "PASS",
+  "sync": {
+    "rootConfig": 4,
+    "downloadedConfig": 253,
+    "failedConfig": 314,
+    "parsedSites": 1897,
+    "deduplicatedSites": 1744,
+    "drpySites": 177,
+    "jsUrls": 220,
+    "jsDownloaded": 176,
+    "uniqueJs": 157,
+    "jsFailed": 44,
+    "spiderSites": 1419,
+    "jarUrls": 70,
+    "jarDownloaded": 30,
+    "uniqueJar": 30,
+    "jarFailed": 40,
+    "lastGoodResources": 0,
+    "playlistUrls": 555,
+    "playlistDownloaded": 231,
+    "playlistFailed": 324,
+    "assetsBytes": 58411040
+  },
+  "note": "Runtime initialization/class loading acceptance only. Full third-party Home/Search/Detail/Play compatibility is not claimed."
+}

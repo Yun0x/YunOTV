@@ -30,7 +30,19 @@ Release 使用本项目 `.signing/local-release.p12` 的个人安装证书。首
 
 ## 使用
 
-首次启动自动导入根目录的默认 Source Bundle。也可进入“设置 → 配置源管理”自行添加远程 JSON/TXT/M3U URL，以及通过系统文件选择器批量导入文件；无配置时显示添加引导。部分电视未预装文件选择器时，需要先安装兼容的文件管理器。
+首次启动直接读取 APK 内的 `assets/yunotv/yunotv-bundle.json`，无需下载 GitHub 配置。根目录 `sources.txt.json` 只供开发机同步使用。也可进入“设置 → 配置源管理”自行添加远程 JSON/TXT/M3U URL，以及通过系统文件选择器批量导入文件；无配置时显示添加引导。部分电视未预装文件选择器时，需要先安装兼容的文件管理器。
+
+开发机主动更新默认配置：
+
+```sh
+./gradlew syncYunoSources
+```
+
+该独立任务下载配置到 `build/yuno-source-staging`，复用 Android 客户端的 Kotlin Parser / Unified Model / 指纹 / Capability Detection，生成 `app/src/main/assets/yunotv/yunotv-bundle.json`、`resource-index.json`、`spider-asset-index.json` 与按 SHA-256 命名的 JS/JAR。相对地址始终按原始远程配置 URL 解析。直播清单另存为完整的压缩本地资源，在选择直播目录时读取，每次最多显示 5,000 个频道，避免启动加载几十万个频道。
+
+普通 `assembleDebug` / `assembleRelease` 只使用已生成的 Assets，不触发同步。根配置下载或最终验证失败时保留旧版；可选子配置和插件的失效链接记录在诊断中，可用资源才进入索引。更新下载失败时保留上一版通过哈希验证的资源。macOS 使用原子目录交换，旧目录保存在 staging 供回滚。构建工具只使用 Python 3 标准库和已有的 Kotlin/Gradle 依赖。运行时优先读取 Assets，未收录的资源才允许远程下载，TLS 验证保持启用。
+
+本地化只保证配置、已下载的 JS/JAR/直播清单可离线加载；CMS/站点 API、图片和视频仍需网络。最新统计及 GitHub 阻断验收见 [本地配置验收](docs/offline-config-acceptance.md)。
 
 外部 TVBox JSON 仅在解析边界使用。`sites` 中 `type = 1`、HTTP(S) JSON CMS API 可用；`type = 0` 的 XML CMS 和 WebView 嗅探仍未支持。Phase 3 增加隔离的 DRPY/Spider 执行和明确的 JSON HTTP 解析器，但当前真实 Bundle 的插件没有通过完整四步验证，不能视为日常兼容版已完成。详见 [Phase 3 验收](docs/phase3-acceptance.md)。
 
@@ -81,7 +93,7 @@ python3 scripts/test-fixture-server.py --video /tmp/yuno-test.mp4
 
 ## 第二阶段
 
-正式品牌来自根目录 `logo.png`，原图保持不变；默认配置只来自根目录 `sources.txt.json`，Gradle 自动生成 APK 内资源副本。首次导入后，删除或禁用操作会保留。
+正式品牌来自根目录 `logo.png`，原图保持不变。第二阶段曾复制根 Manifest 到 APK；当前版本改用下面的本地编译流程。首次导入后，删除或禁用操作会保留。
 
 新增递归 Bundle / MultiRepo、Generic JSON、相对 URL、逐站点能力诊断、健康记录、文件缓存迁移和离线首页/详情。电视界面使用统一颜色、圆角、尺寸与 160 ms 焦点动画，新增 Hero 播放入口、按可见栏目分页、400 ms 搜索防抖和逐源结果更新。
 

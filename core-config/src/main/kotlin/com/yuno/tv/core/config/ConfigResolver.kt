@@ -7,9 +7,17 @@ import kotlinx.coroutines.withContext
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 
 /** No external code executes here. Load is injected so offline and remote resolution share one path. */
-class ConfigResolver(private val load: suspend (SourceOrigin, MergePolicy) -> ConfigCache?) {
+class ConfigResolver(private val maximumConfigs: Int = MAX_CONFIGS, private val maximumSites: Int = MAX_SITES,
+    private val maximumPlaylists: Int = 4, private val deduplicateDocuments: Boolean = false,
+    private val keepPlaylistReferences: Boolean = false,
+    private val load: suspend (SourceOrigin, MergePolicy) -> ConfigCache?) {
     data class Resolution(val config: UnifiedConfig, val diagnostics: List<ConfigDiagnostic>, val statistics: BundleStatistics)
     suspend fun resolve(body: String, origin: SourceOrigin, header: String = "", policy: MergePolicy = MergePolicy()): Resolution {
+        if (ContentTypeDetector().detect(body) == ConfigContentType.COMPILED_BUNDLE) {
+            val compiled = withContext(Dispatchers.Default) { CompiledBundleParser().parse(body) }
+            return Resolution(compiled.config, listOf(ConfigDiagnostic(origin.sourceId, origin.sourceName, origin.originUrl,
+                origin.priority, "OK", siteCount = compiled.config.sites.size, cached = true)), compiled.statistics)
+        }
         val configs = mutableListOf<UnifiedConfig>(); val diagnostics = mutableListOf<ConfigDiagnostic>()
         val documents = mutableMapOf<String, ConfigCache?>()
         val failures = mutableMapOf<String, ErrorCode>()
@@ -21,14 +29,26 @@ class ConfigResolver(private val load: suspend (SourceOrigin, MergePolicy) -> Co
             return documents[key]
         }
         val resolvedUrls = mutableSetOf<String>()
+        val expandedPriorities = mutableMapOf<String, Int>()
         val visited = mutableSetOf<String>(); var count = 0; var sites = 0; var bundleCount = 0; var enabledCount = 0
         suspend fun visit(text: String, from: SourceOrigin, contentType: String, depth: Int, currentPolicy: MergePolicy, path: Set<String>) {
-            if (depth > currentPolicy.maxDepth || count >= MAX_CONFIGS || sites >= MAX_SITES) {
+            if (deduplicateDocuments) {
+                val url = SourceFingerprint.normalizedUrl(from.originUrl)
+                if ((expandedPriorities[url] ?: Int.MIN_VALUE) >= from.priority) return
+                expandedPriorities[url] = from.priority
+            }
+            if (depth > currentPolicy.maxDepth || count >= maximumConfigs || sites >= maximumSites) {
                 configs += UnifiedConfig(warnings = listOf(ConfigWarning(ErrorCode.CONFIG_FORMAT, from.sourceName))); return
             }
             count++
             val detected = withContext(Dispatchers.Default) { ContentTypeDetector().detect(text, from.originUrl, contentType) }
             when (detected) {
+                ConfigContentType.COMPILED_BUNDLE -> {
+                    val compiled = withContext(Dispatchers.Default) { CompiledBundleParser().parse(text) }
+                    configs += compiled.config
+                    sites += compiled.config.sites.size
+                    resolvedUrls += SourceFingerprint.normalizedUrl(from.originUrl)
+                }
                 ConfigContentType.YUNO_BUNDLE, ConfigContentType.MULTI_REPO -> {
                     val bundle = if (detected == ConfigContentType.YUNO_BUNDLE) withContext(Dispatchers.Default) { YunoSourceBundleParser().parse(text, from.originUrl) } else null
                     val entries = bundle?.sources ?: withContext(Dispatchers.Default) { MultiRepoParser().parse(text, from.originUrl) }
@@ -37,7 +57,7 @@ class ConfigResolver(private val load: suspend (SourceOrigin, MergePolicy) -> Co
                     if (depth == 0) { bundleCount = entries.size; enabledCount = entries.count { it.enabled } }
                     for (entry in entries.filter { it.enabled }.sortedByDescending { it.priority }) {
                         val url = SourceFingerprint.normalizedUrl(entry.url)
-                        if (url in path || count >= MAX_CONFIGS || depth >= rule.maxDepth) { configs += UnifiedConfig(warnings = listOf(ConfigWarning(ErrorCode.CONFIG_FORMAT, entry.name))); continue }
+                        if (url in path || count >= maximumConfigs || depth >= rule.maxDepth) { configs += UnifiedConfig(warnings = listOf(ConfigWarning(ErrorCode.CONFIG_FORMAT, entry.name))); continue }
                         val child = SourceOrigin(from.sourceId, entry.name, entry.url, if (bundle != null) entry.priority else from.priority)
                         val start = System.currentTimeMillis()
                         try {
@@ -63,24 +83,26 @@ class ConfigResolver(private val load: suspend (SourceOrigin, MergePolicy) -> Co
                             ConfigContentType.TVBOX -> TvBoxConfigParser().parse(text, from)
                             ConfigContentType.GENERIC_JSON -> GenericJsonParser().parse(text, from)
                             ConfigContentType.M3U -> M3uConfigParser().parse(text, from)
-                            ConfigContentType.TXT -> TxtConfigParser().parse(text, from)
+                            ConfigContentType.TXT -> TxtConfigParser().parse(text, from, contentType == "application/x-yuno-live")
                             else -> throw SourceException(ErrorCode.CONFIG_FORMAT)
                         }
                     }
-                    parsed = CapabilityDetector().apply(parsed.copy(sites = parsed.sites.take((MAX_SITES - sites).coerceAtLeast(0))))
+                    parsed = CapabilityDetector().apply(parsed.copy(sites = parsed.sites.take((maximumSites - sites).coerceAtLeast(0))))
                     resolvedUrls += SourceFingerprint.normalizedUrl(from.originUrl)
                     sites += parsed.sites.size
                     configs += parsed
                     // Only a small bounded batch of playlist references is fetched. Never crawl media segments.
-                    for (live in (parsed.lives + parsed.sites.filter { it.capability.kind == CapabilityKind.LIVE_M3U }.map { UnifiedLive(it.id, it.name, it.api, origin = it.origin) }).filter { it.url.toHttpUrlOrNull()?.encodedPath?.lowercase()?.let { p -> p.endsWith(".m3u") || p.endsWith(".txt") } == true }.take(4)) {
+                    for (live in (parsed.lives + parsed.sites.filter { it.capability.kind == CapabilityKind.LIVE_M3U }.map { UnifiedLive(it.id, it.name, it.api, origin = it.origin) }).filter { it.url.toHttpUrlOrNull()?.encodedPath?.lowercase()?.let { p -> p.endsWith(".m3u") || p.endsWith(".txt") } == true }.take(maximumPlaylists)) {
                         val url = SourceFingerprint.normalizedUrl(live.url)
-                        if (url in path || count >= MAX_CONFIGS) continue
+                        if (url in path || count >= maximumConfigs) continue
                         try { document(from.copy(originUrl = live.url), currentPolicy)?.let { cache ->
                             visit(cache.body, from.copy(originUrl = live.url), cache.contentType, depth + 1, currentPolicy, path + url)
                         } } catch (error: Exception) { error.rethrowCancellation(); configs += UnifiedConfig(warnings = listOf(ConfigWarning(error.friendlyCode(), live.name))) }
                     }
                     // A playlist URL itself is not a playable channel.
-                    configs[configIndex] = parsed.copy(lives = parsed.lives.filterNot { it.url.substringBefore('?').let { p -> p.endsWith(".m3u") || p.endsWith(".txt") } })
+                    fun playlist(live: UnifiedLive) = live.url.substringBefore('?').let { p -> p.endsWith(".m3u") || p.endsWith(".txt") }
+                    configs[configIndex] = parsed.copy(lives = parsed.lives.filterNot(::playlist),
+                        playlists = if (keepPlaylistReferences) parsed.lives.filter(::playlist) else parsed.playlists)
                 }
             }
         }

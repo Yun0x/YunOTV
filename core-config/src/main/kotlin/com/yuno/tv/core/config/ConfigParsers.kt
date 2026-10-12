@@ -28,7 +28,7 @@ class TvBoxConfigParser {
             if (!supported) warnings += ConfigWarning(ErrorCode.UNSUPPORTED, name)
             UnifiedSite(SourceFingerprint.create(type.toString(), api, ext), obj.text("key").ifBlank { name },
                 name, type, api, obj.flag("searchable", true), obj.flag("quickSearch", true),
-                obj.flag("filterable", false), ext, origin, supported, metadata = SourceMetadata(spider = RelativeUrlResolver.resolve(origin.originUrl, root.text("spider")), headers = (obj.getAsJsonObjectSafe("headers").entrySet() + obj.getAsJsonObjectSafe("header").entrySet()).filter { it.value.isJsonPrimitive }.associate { it.key to it.value.asString }))
+                obj.flag("filterable", false), ext, origin, supported, metadata = SourceMetadata(spider = RelativeUrlResolver.resolve(origin.originUrl, obj.text("jar").ifBlank { root.text("spider") }), headers = (obj.getAsJsonObjectSafe("headers").entrySet() + obj.getAsJsonObjectSafe("header").entrySet()).filter { it.value.isJsonPrimitive }.associate { it.key to it.value.asString }))
         }
         val lives = mutableListOf<UnifiedLive>()
         fun addLive(obj: JsonObject, group: String = "IPTV", depth: Int = 0) {
@@ -37,7 +37,7 @@ class TvBoxConfigParser {
             val url = RelativeUrlResolver.resolve(origin.originUrl, obj.text("url").ifBlank { obj.array("urls").firstOrNull()?.let { if (it.isJsonPrimitive) it.asString else "" }.orEmpty() })
             if (url.toHttpUrlOrNull() == null) { warnings += ConfigWarning(ErrorCode.INVALID_URL, obj.text("name")); return }
             lives += UnifiedLive(SourceFingerprint.create("live", url), obj.text("name").trim().replace(Regex("\\s+"), " ").ifBlank { "IPTV" }, url,
-                group, obj.text("logo"), obj.text("epg"), origin)
+                group, RelativeUrlResolver.resolve(origin.originUrl, obj.text("logo")), RelativeUrlResolver.resolve(origin.originUrl, obj.text("epg")), origin)
         }
         dto.lives.take(5000).forEach { if (it.isJsonObject) addLive(it.asJsonObject) }
         val parses = dto.parses.take(100).mapNotNull {
@@ -60,8 +60,9 @@ class TxtConfigParser {
             if (line.isEmpty() || line.startsWith('#') || line.startsWith("//")) return@forEach
             val delimiter = if (line.contains('|')) '|' else ','
             val split = line.split(delimiter, limit = 2)
-            val url = split.last().trim()
-            if (url == "#genre#") { group = split.first().trim(); return@forEach }
+            val rawUrl = split.last().trim()
+            if (rawUrl == "#genre#") { group = split.first().trim(); return@forEach }
+            val url = RelativeUrlResolver.resolve(origin.originUrl, rawUrl)
             if (url.toHttpUrlOrNull() == null) {
                 // Unmarked prose is treated as a comment; malformed URL-looking rows are reported.
                 if (line.contains("://") || split.size > 1) warnings += ConfigWarning(ErrorCode.INVALID_URL)
@@ -91,10 +92,11 @@ class M3uConfigParser {
             val line = raw.trim()
             fun attribute(key: String): String = Regex("${Regex.escape(key)}=\"([^\"]*)\"").find(line)?.groupValues?.get(1).orEmpty()
             when {
-                line.startsWith("#EXTM3U") -> epg = attribute("url-tvg").ifBlank { attribute("x-tvg-url") }
-                line.startsWith("#EXTINF") -> { name = line.substringAfter(',', "IPTV"); group = attribute("group-title").ifBlank { "IPTV" }; logo = attribute("tvg-logo") }
+                line.startsWith("#EXTM3U") -> epg = RelativeUrlResolver.resolve(origin.originUrl, attribute("url-tvg").ifBlank { attribute("x-tvg-url") })
+                line.startsWith("#EXTINF") -> { name = line.substringAfter(',', "IPTV"); group = attribute("group-title").ifBlank { "IPTV" }; logo = RelativeUrlResolver.resolve(origin.originUrl, attribute("tvg-logo")) }
                 line.isNotEmpty() && !line.startsWith('#') -> {
-                    if (line.toHttpUrlOrNull() != null) lives += UnifiedLive(SourceFingerprint.create("live", line), name, line, group, logo, epg, origin)
+                    val url = RelativeUrlResolver.resolve(origin.originUrl, line)
+                    if (url.toHttpUrlOrNull() != null) lives += UnifiedLive(SourceFingerprint.create("live", url), name, url, group, logo, epg, origin)
                     else warnings += ConfigWarning(ErrorCode.INVALID_URL)
                 }
             }

@@ -7,7 +7,7 @@ class CapabilityDetector {
     fun detect(site: UnifiedSite): SourceCapability {
         val api = site.api.lowercase(); val ext = site.ext.lowercase()
         val kind = when {
-            api.contains("drpy") || api.endsWith(".js") || ext.substringBefore('?').endsWith(".js") -> CapabilityKind.DRPY_JS
+            api.contains("drpy") || api.substringBefore('?').endsWith(".js") || ext.substringBefore('?').endsWith(".js") -> CapabilityKind.DRPY_JS
             api.startsWith("csp_") || api.contains(".jar") -> CapabilityKind.SPIDER_JAR
             site.type == 3 -> if (site.metadata.spider.isNotBlank()) CapabilityKind.SPIDER_JAR else CapabilityKind.TVBOX_TYPE3
             api.substringBefore('?').endsWith(".m3u") -> CapabilityKind.LIVE_M3U

@@ -3,7 +3,8 @@ package com.yuno.tv.core.model
 data class SourceOrigin(val sourceId: String, val sourceName: String, val originUrl: String, val priority: Int)
 data class UnifiedConfig(
     val sites: List<UnifiedSite> = emptyList(), val lives: List<UnifiedLive> = emptyList(),
-    val parses: List<UnifiedParse> = emptyList(), val warnings: List<ConfigWarning> = emptyList(), val spider: String = ""
+    val parses: List<UnifiedParse> = emptyList(), val warnings: List<ConfigWarning> = emptyList(), val spider: String = "",
+    val playlists: List<UnifiedLive> = emptyList()
 )
 data class UnifiedSite(
     val id: String, val key: String, val name: String, val type: Int, val api: String,

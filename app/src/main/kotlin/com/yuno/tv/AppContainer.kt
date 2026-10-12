@@ -46,8 +46,9 @@ class AppContainer(app: Application) {
     val network = NetworkClient(app)
     val library = LibraryRepository(database)
     val settings = SettingsRepository(app)
-    val configs = ConfigRepository(SourceStore(database, app.filesDir.resolve("config-cache")), network, settings, scope, logger) { app.assets.open("sources.txt.json").bufferedReader(Charsets.UTF_8).use { it.readText() } }
     val runtime = com.yuno.tv.core.runtime.CompatibilityRuntime(app, network.http, app.filesDir.resolve("plugin-cache"))
+    val configs = ConfigRepository(SourceStore(database, app.filesDir.resolve("config-cache")), network, settings, scope, logger,
+        defaultPlaylist = runtime::localPlaylist) { app.assets.open("yunotv/yunotv-bundle.json").bufferedReader(Charsets.UTF_8).use { it.readText() } }
     val providers = ProviderRegistry(network, app.filesDir.resolve("media-cache"), runtime::provider)
     val playback = PlaybackCoordinator(providers, network.http)
     val search = SearchAggregator(providers)

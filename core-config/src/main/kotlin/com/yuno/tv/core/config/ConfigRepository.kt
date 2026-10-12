@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap
 class ConfigRepository(
     private val store: SourceStore, private val network: NetworkClient,
     private val settings: SettingsRepository, private val scope: CoroutineScope, private val logger: AppLogger,
+    private val defaultPlaylist: suspend (String) -> String? = { null },
     private val defaultBundle: suspend () -> String = { "" }
 ) {
     private val locks = ConcurrentHashMap<String, Mutex>()
@@ -32,12 +33,19 @@ class ConfigRepository(
     private val _ready = MutableStateFlow(false)
     val ready = _ready.asStateFlow()
     suspend fun initialize() {
-        if (!settings.settings.first().bundleImported) {
+        val imported = settings.settings.first().bundleImported
+        val existing = store.get("default-bundle")
+        // Upgrade the legacy remote manifest in place, retaining disable/priority/delete choices.
+        if (!imported || existing != null) {
             val body = withContext(Dispatchers.IO) { defaultBundle() }
             if (body.isNotBlank()) {
-                withContext(Dispatchers.Default) { YunoSourceBundleParser().parse(body) }
-                store.replace(SourceRecord("default-bundle", "Yuno TV Source Bundle", "local://sources.txt.json", "BUNDLE", local = true),
-                    ConfigCache("default-bundle", body, hash = SourceFingerprint.sha256(body)))
+                withContext(Dispatchers.Default) { CompiledBundleParser().parse(body) }
+                val hash = SourceFingerprint.sha256(body)
+                if (existing?.format != "COMPILED" || store.cache("default-bundle")?.hash != hash) {
+                    val source = (existing ?: SourceRecord("default-bundle", "Yuno TV Source Bundle", "")).copy(
+                        url = "asset://yunotv/yunotv-bundle.json", format = "COMPILED", local = true, status = "OK", error = null)
+                    store.replace(source, ConfigCache("default-bundle", body, hash = hash, url = source.url))
+                }
             }
             settings.update { it.copy(bundleImported = true) }
         }
@@ -49,6 +57,14 @@ class ConfigRepository(
         }
     }
     suspend fun allSources(): List<SourceRecord> = store.all()
+    suspend fun livePlaylist(id: String): List<UnifiedLive> = withContext(Dispatchers.IO) {
+        val playlist = config.value.playlists.firstOrNull { it.id == id } ?: throw SourceException(ErrorCode.EMPTY)
+        val body = defaultPlaylist(playlist.url) ?: network.download(playlist.url).body ?: throw SourceException(ErrorCode.DOWNLOAD)
+        val origin = playlist.origin.copy(originUrl = playlist.url)
+        val parsed = if (body.trimStart().startsWith("#EXTM3U")) M3uConfigParser().parse(body, origin)
+            else TxtConfigParser().parse(body, origin, forceLive = true)
+        parsed.lives.distinctBy { it.id }.take(5000)
+    }
     suspend fun addRemote(name: String, url: String, format: String, priority: Int): String {
         val value = url.trim()
         if (value.toHttpUrlOrNull() == null) throw SourceException(ErrorCode.INVALID_URL)
@@ -60,7 +76,8 @@ class ConfigRepository(
         val body = NetworkClient.decodeUtf8(bytes)
         val detected = withContext(Dispatchers.Default) { ContentTypeDetector().detect(body) }
         withContext(Dispatchers.Default) {
-            if (detected == ConfigContentType.YUNO_BUNDLE) YunoSourceBundleParser().parse(body)
+            if (detected == ConfigContentType.COMPILED_BUNDLE) CompiledBundleParser().parse(body)
+            else if (detected == ConfigContentType.YUNO_BUNDLE) YunoSourceBundleParser().parse(body)
             else if (detected != ConfigContentType.MULTI_REPO) ConfigParser().parse(body, SourceOrigin("", name, "local://$name", 100), format)
         }
         val source = SourceRecord(UUID.randomUUID().toString(), name, "local://$name", if (detected == ConfigContentType.YUNO_BUNDLE) "BUNDLE" else format, local = true)

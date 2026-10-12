@@ -14,13 +14,15 @@ import java.io.File
 import java.util.concurrent.TimeUnit
 
 /** Content addressed artifacts, conditional refresh and last-good fallback. URLs never become paths. */
-class ArtifactRepository(private val directory: File, client: OkHttpClient, private val maximum: Int, private val capacity: Long, private val validate: (ByteArray) -> Unit = {}) {
+class ArtifactRepository(private val directory: File, client: OkHttpClient, private val maximum: Int, private val capacity: Long,
+    private val local: suspend (String) -> Pair<Artifact, File>? = { null }, private val validate: (ByteArray) -> Unit = {}) {
     data class Artifact(val url: String, val hash: String, val etag: String, val lastModified: String, val lastSuccess: Long)
     private val http = client.newBuilder().callTimeout(15, TimeUnit.SECONDS).build()
     private val lock = Mutex()
     private val failures=linkedMapOf<String,Long>()
     suspend fun get(input: String, refresh: Boolean = false): Pair<Artifact, File> = lock.withLock {
         withContext(Dispatchers.IO) {
+            if (!refresh) local(input)?.let { return@withContext it }
             val url = input.substringBefore(";md5;").trim().toHttpUrlOrNull()?.toString() ?: throw RuntimeFailure("INVALID_URL")
             if(System.currentTimeMillis()-(failures[url] ?: 0)<120_000)throw RuntimeFailure("DOWNLOAD_FAILED")
             directory.mkdirs()
@@ -57,7 +59,7 @@ class ArtifactRepository(private val directory: File, client: OkHttpClient, priv
                 }
             } catch (error: Exception) {
                 if(error is kotlinx.coroutines.CancellationException)throw error
-                if (previous != null && cached != null) previous to cached else { failures[url]=System.currentTimeMillis();while(failures.size>256)failures.remove(failures.keys.first());throw error }
+                if (previous != null && cached != null) previous to cached else local(input) ?: run { failures[url]=System.currentTimeMillis();while(failures.size>256)failures.remove(failures.keys.first());throw error }
             }
         }
     }
@@ -93,8 +95,8 @@ class ArtifactRepository(private val directory: File, client: OkHttpClient, priv
         }
     }
 }
-class JarRepository(directory: File, client: OkHttpClient) {
-    private val delegate = ArtifactRepository(directory, client, RuntimePolicy.JAR_BYTES, 96L * 1024 * 1024, { JarVerifier().validate(it) })
+class JarRepository(directory: File, client: OkHttpClient, local: suspend (String) -> Pair<ArtifactRepository.Artifact, File>? = { null }) {
+    private val delegate = ArtifactRepository(directory, client, RuntimePolicy.JAR_BYTES, 96L * 1024 * 1024, local = local, validate = { JarVerifier().validate(it) })
     suspend fun get(url: String, refresh: Boolean = false) = withContext(Dispatchers.IO) { delegate.get(url, refresh).also { JarVerifier().validate(it.second.readBytes()) } }
     suspend fun clear() = delegate.clear()
     fun stats() = delegate.stats()

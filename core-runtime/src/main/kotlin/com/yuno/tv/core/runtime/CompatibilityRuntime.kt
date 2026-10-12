@@ -13,16 +13,18 @@ import java.io.File
 
 /** Downloads are lazy: importing a bundle never executes or warms all of its plugins. */
 class CompatibilityRuntime(context: Context, private val http: OkHttpClient, private val directory: File) {
-    val scripts = ArtifactRepository(directory.resolve("js"),http,RuntimePolicy.JS_BYTES,32L*1024*1024) { bytes ->
+    private val resources = RemoteResourceResolver(context.assets, directory.resolve("assets"))
+    val scripts = ArtifactRepository(directory.resolve("js"),http,RuntimePolicy.JS_BYTES,32L*1024*1024, local = { resources.get(it, "JS") }) { bytes ->
         val text=com.yuno.tv.core.network.NetworkClient.decodeUtf8(bytes).trimStart()
         if(text.startsWith('<') || text.isBlank())throw RuntimeFailure("INVALID_JS")
     }
-    val jars = JarRepository(directory.resolve("jar"),http)
+    val jars = JarRepository(directory.resolve("jar"),http) { resources.get(it, "JAR") }
     private val jsWorker = RuntimeIsolation(context,DrpyRuntimeService::class.java)
     private val spiderWorker = RuntimeIsolation(context,SpiderRuntimeService::class.java)
     private val hosts = object : LinkedHashMap<String,RuntimeHttpBridge>(8,0.75f,true) { override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String,RuntimeHttpBridge>?) = size>8 }
     private val _diagnostics = MutableStateFlow<Map<String, RuntimeDiagnostic>>(emptyMap())
     val diagnostics = _diagnostics.asStateFlow()
+    suspend fun localPlaylist(url: String): String? = resources.get(url, "PLAYLIST")?.second?.readText(Charsets.UTF_8)
     private val diagnosticMutex=kotlinx.coroutines.sync.Mutex()
     private val diagnosticFile = directory.resolve("evidence.json")
     init { runCatching { require(diagnosticFile.length()<512*1024);val root=JsonParser.parseString(diagnosticFile.readText()).asJsonObject;_diagnostics.value=root.entrySet().take(256).associate { it.key to Gson().fromJson(it.value,RuntimeDiagnostic::class.java) } } }
@@ -79,7 +81,7 @@ class CompatibilityRuntime(context: Context, private val http: OkHttpClient, pri
         }
         diagnosticMutex.withLock { withContext(Dispatchers.IO) { runCatching { directory.mkdirs();val tmp=directory.resolve("evidence.tmp");tmp.writeText(Gson().toJson(_diagnostics.value));tmp.renameTo(diagnosticFile) } } }
     }
-    suspend fun clear() { jsWorker.reset();spiderWorker.reset();scripts.clear();jars.clear();withContext(Dispatchers.IO) { directory.resolve("transfer").deleteRecursively();directory.resolve("storage").deleteRecursively() };synchronized(hosts){hosts.clear()} }
+    suspend fun clear() { jsWorker.reset();spiderWorker.reset();scripts.clear();jars.clear();resources.clear();withContext(Dispatchers.IO) { directory.resolve("transfer").deleteRecursively();directory.resolve("storage").deleteRecursively() };synchronized(hosts){hosts.clear()} }
 }
 data class RuntimeDiagnostic(val sourceId: String,val providerType: String,val runtime: String,val api: String,val jar: String,val hash: String="",val operations: Map<String,Boolean> = emptyMap(),val latencyMs: Long=0,val lastError: String="") {
     val fullySupported get() = listOf("home","search","detail","play").all { operations[it]==true }
